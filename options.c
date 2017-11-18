@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
+#include <stdbool.h>
 
 void readopt(int argc, char *argv[], char **input_name, char **output_name, char **key, char **mode, char **key_lenght)
 {
@@ -28,23 +30,23 @@ void readopt(int argc, char *argv[], char **input_name, char **output_name, char
 	}
 }
 
-char checkopt(char **input_name, char **output_name, char **key, char **mode, char **key_lenght)
+unsigned char checkopt(char **input_name, char **output_name, char **key, char **mode, char **key_lenght)
 {
-	printf("input_name: %s\n", *input_name);
-	printf("output_name: %s\n", *output_name);
-	printf("key: %s\n", *key);
-	printf("mode: %s\n", *mode);
-	printf("key_lenght: %s\n", *key_lenght);
+	char opt_mode = 0;
+	
+	/*
+     *	Verifie que la commande soit correcte.
+	 */
 
 	if ( *input_name != NULL && *output_name != NULL && *key != NULL && *mode == NULL && *key_lenght == NULL )
 	{
-		printf("Chiffrage/dechiffrage");
-		return 0;
+		// Chiffrage / Dechiffrage
+		opt_mode = 0;
 	}
 	else if ( *input_name != NULL && *mode != NULL && *output_name == NULL && *key == NULL )
 	{
-		printf("Cassage");
-		return 1;
+		// Cassage
+		opt_mode = 1;
 	}
 	else
 	{
@@ -53,6 +55,32 @@ char checkopt(char **input_name, char **output_name, char **key, char **mode, ch
 		printf("	./xorcipher -i inTextFile -o outTextFile -k cle\n");
 		printf("Cassage:\n");
 		printf("	./xorcipher -i inTextFile -m mode [-l longCle]\n");
-		return -1;
-	}		
+		exit(EXIT_FAILURE);
+	}
+
+	/*
+	 *	Verifie que le fichier input existe et soit accessible en lecture.
+	 */
+	
+	FILE *test_read_file;
+	if ( (test_read_file = fopen(*input_name, "r") ) == NULL )
+	{
+		printf("Impossible d'ouvrir le fichier donne en lecture\n");
+		exit(EXIT_FAILURE);
+	}
+
+	fclose(test_read_file);
+
+	/*
+	 * Si on est en mode Chiffrage / Dechiffrage, verifie si la cle est valide
+	 */
+	
+	if ( opt_mode == 0 )
+	{
+		if ( checkkey(key) == false )
+		{
+			printf("La cle n'est pas valide\n");
+			exit(EXIT_FAILURE);
+		}
+	}
 }

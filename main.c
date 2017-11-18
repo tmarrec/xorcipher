@@ -13,10 +13,10 @@ int main(int argc, char *argv[])
 	char *mode = 0;
 	char *key_lenght = 0;
 
-	char opt_mode = 0;
+	unsigned char opt_mode = 0;
 
 	readopt(argc, argv, &input_name, &output_name, &key, &mode, &key_lenght);
 	opt_mode = checkopt(&input_name, &output_name, &key, &mode, &key_lenght);
-	printf("%d", opt_mode);
+
 	return 0;
 }

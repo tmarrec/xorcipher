@@ -1,11 +1,11 @@
 CC=gcc
 CFLAGS=-Wall
-OBJ=readopt.o main.o
+OBJ=options.o main.o
 
 util: $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o main
 
-readopt.o: readopt.c
+options.o: options.c
 main.o: main.c
 
 clean:

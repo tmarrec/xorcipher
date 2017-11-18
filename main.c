@@ -1,37 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+
+#include "readopt.h"
 
 int main(int argc, char *argv[])
 {
 	printf("hey\n");
-	int c;
+	
 	char *inputName = 0;
 	char *outputName = 0;
 	char *key = 0;
 	char *mode = 0;
 	char *keyLenght = 0;
-	while ( (c = getopt(argc, argv, "i:o:k:m:l:")) != -1 )
-	{
-		switch(c)
-		{
-			case 'i':
-				inputName = optarg;
-				break;
-			case 'o':
-				outputName = optarg;
-				break;
-			case 'k':
-				key = optarg;
-				break;
-			case 'm':
-				mode = optarg;
-				break;
-			case 'l':
-				keyLenght = optarg;
-				break;
-		}
-	}
+
+	readOpt(argc, argv, &inputName, &outputName, &key, &mode, &keyLenght);
+	
 	printf("inputName: %s\n", inputName);
 	printf("outputName: %s\n", outputName);
 	printf("key: %s\n", key);
@@ -48,7 +31,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("Erreur commande");
+		printf("Erreur commande\n");
 	}
 	return 0;
 }

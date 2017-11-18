@@ -82,5 +82,8 @@ unsigned char checkopt(char **input_name, char **output_name, char **key, char *
 			printf("La cle n'est pas valide\n");
 			exit(EXIT_FAILURE);
 		}
+		return 0;
 	}
+	return 1;
+
 }

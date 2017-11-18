@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "options.h"
+#include "checkascii.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,6 +19,10 @@ int main(int argc, char *argv[])
 
 	readopt(argc, argv, &input_name, &output_name, &key, &mode, &key_lenght);
 	opt_mode = checkopt(&input_name, &output_name, &key, &mode, &key_lenght);
-
+	printf("opt_mode : %d\n", opt_mode);
+	if ( opt_mode == 0 )
+	{
+		//checkmessage(&input_name);
+	}
 	return 0;
 }

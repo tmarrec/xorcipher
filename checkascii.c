@@ -17,7 +17,7 @@ bool checkkey(char **key)
 	return true;
 }
 
-// Useless atm
+// Unfinished and useless atm
 bool checkmessage(char **input_name)
 {
 	printf("%s\n", *input_name);
@@ -33,4 +33,5 @@ bool checkmessage(char **input_name)
 		printf("%d ", c);
 	}
 	fclose(input_file);
+	return true;
 }

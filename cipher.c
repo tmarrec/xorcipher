@@ -8,6 +8,10 @@ void encode(char **input_name, char **key, char **output_name)
 		
 	FILE *input_file;
 	input_file = fopen(*input_name, "r");
+
+	FILE *output_file;
+	output_file = fopen(*output_name, "w+");
+
 	int c = 0;
 	int i = 0;
 	char ascii_c = 0;
@@ -15,6 +19,7 @@ void encode(char **input_name, char **key, char **output_name)
 	{
 		ascii_c = (int)*(*key+i);
 		printf("%x ", ascii_c ^ c);
+		fputc(ascii_c ^ c, output_file);
 		if ( i < strlen(*key)-1 )
 		{
 			++i;
@@ -24,4 +29,6 @@ void encode(char **input_name, char **key, char **output_name)
 			i = 0;
 		}
 	}
+	fclose(input_file);
+	fclose(output_file);
 }

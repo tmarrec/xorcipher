@@ -5,6 +5,7 @@
 #include "options.h"
 #include "checkascii.h"
 #include "cipher.h"
+#include "c_validate.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,7 +22,12 @@ int main(int argc, char *argv[])
 	printf("opt_mode : %d\n", opt_mode);
 	if ( opt_mode == 0 )
 	{
-		xor_cipher(&input_name, &key, &output_name);
+		xor_cipher(&input_name, key, &output_name);
+	}
+	else
+	{
+		//printf("%d\n", checkmessage(&input_name));	
+		c_validate(&input_name);
 	}
 	return 0;
 }

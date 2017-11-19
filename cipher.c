@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void xor_cipher(char **input_name, char **key, char **output_name)
+void xor_cipher(char **input_name, char key[], char **output_name)
 {
 	FILE *input_file;
 	input_file = fopen(*input_name, "r");
@@ -15,9 +15,9 @@ void xor_cipher(char **input_name, char **key, char **output_name)
 	char ascii_c = 0;
 	while ( (c = fgetc(input_file)) != EOF )
 	{
-		ascii_c = (int)*(*key+i);
+		ascii_c = key[i];
 		fputc(ascii_c ^ c, output_file);
-		if ( i < strlen(*key)-1 )
+		if ( i < strlen(key)-1 )
 		{
 			++i;
 		}

@@ -4,6 +4,8 @@
 #include <string.h>
 #include <stdbool.h>
 
+#include "checkascii.h"
+
 void readopt(int argc, char *argv[], char **input_name, char **output_name, char **key, char **mode, char **key_lenght)
 {
 	int c = 0;

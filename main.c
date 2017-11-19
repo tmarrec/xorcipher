@@ -4,6 +4,7 @@
 
 #include "options.h"
 #include "checkascii.h"
+#include "cipher.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,7 +23,7 @@ int main(int argc, char *argv[])
 	printf("opt_mode : %d\n", opt_mode);
 	if ( opt_mode == 0 )
 	{
-		//checkmessage(&input_name);
+		encode(&input_name, &key, &output_name);
 	}
 	return 0;
 }

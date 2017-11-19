@@ -4,11 +4,9 @@
 
 void xor_cipher(char **input_name, char **key, char **output_name)
 {
-	printf("%s\n", *input_name);
-		
 	FILE *input_file;
 	input_file = fopen(*input_name, "r");
-
+	
 	FILE *output_file;
 	output_file = fopen(*output_name, "w+");
 
@@ -18,7 +16,6 @@ void xor_cipher(char **input_name, char **key, char **output_name)
 	while ( (c = fgetc(input_file)) != EOF )
 	{
 		ascii_c = (int)*(*key+i);
-		printf("%x ", ascii_c ^ c);
 		fputc(ascii_c ^ c, output_file);
 		if ( i < strlen(*key)-1 )
 		{
@@ -29,7 +26,6 @@ void xor_cipher(char **input_name, char **key, char **output_name)
 			i = 0;
 		}
 	}
-	//fputc('\0', output_file);
 	fclose(input_file);
 	fclose(output_file);
 }

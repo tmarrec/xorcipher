@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void encode(char **input_name, char **key, char **output_name)
+void xor_cipher(char **input_name, char **key, char **output_name)
 {
 	printf("%s\n", *input_name);
 		
@@ -29,6 +29,7 @@ void encode(char **input_name, char **key, char **output_name)
 			i = 0;
 		}
 	}
+	//fputc('\0', output_file);
 	fclose(input_file);
 	fclose(output_file);
 }

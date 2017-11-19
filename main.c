@@ -8,8 +8,6 @@
 
 int main(int argc, char *argv[])
 {
-	printf("hey\n");
-	
 	char *input_name = 0;
 	char *output_name = 0;
 	char *key = 0;
@@ -23,7 +21,7 @@ int main(int argc, char *argv[])
 	printf("opt_mode : %d\n", opt_mode);
 	if ( opt_mode == 0 )
 	{
-		encode(&input_name, &key, &output_name);
+		xor_cipher(&input_name, &key, &output_name);
 	}
 	return 0;
 }

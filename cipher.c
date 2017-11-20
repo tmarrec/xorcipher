@@ -1,12 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 void xor_cipher(char **input_name, char key[], char **output_name)
 {
-	clock_t start = clock();
-
 	FILE *input_file;
 	input_file = fopen(*input_name, "r");
 	
@@ -31,7 +28,4 @@ void xor_cipher(char **input_name, char key[], char **output_name)
 	}
 	fclose(input_file);
 	fclose(output_file);
-
-	clock_t end = clock();
-	printf("En %f secondes faut le savoir hein !\n", (double)(end-start)/CLOCKS_PER_SEC);
 }

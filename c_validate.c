@@ -69,17 +69,30 @@ void c_validate(char **input_name, char **key_lenght)
 	printf("n : %d\n", n);
 	int *cursor = NULL;
 	cursor = calloc(atoi(*key_lenght), sizeof(int));
-	//cursor = malloc(atoi(*key_lenght)*sizeof(int));
+	char **key_list = NULL;
+	key_list = malloc(n*sizeof(char**));
+	for ( int i = 0; i < n; ++i )
+	{
+		key_list[i] = malloc(atoi(*key_lenght)*sizeof(char*));
+	}
+	char *temp = NULL;
+	temp = malloc(atoi(*key_lenght)*sizeof(char*));
+	
 	unsigned int cursor_in_cursor = atoi(*key_lenght)-1; // LuL
 	for ( int i = 0; i < n; ++i )
 	{
+		temp = malloc(atoi(*key_lenght)*sizeof(char*));
 		for ( int j = 0; j < atoi(*key_lenght); ++j )
 		{
-			printf("%d ", cursor[j]);
+			temp[j] = c_key[j][cursor[j]];
+			key_list[i][j] = c_key[j][cursor[j]];
 		}
-		printf("\n");
+		
+		strcpy(key_list[i], temp);
+		free(temp);
+
 		cursor[cursor_in_cursor]++;
-		while ( cursor[cursor_in_cursor] == strlen(c_key[cursor_in_cursor]) )
+		while ( i < n-1 && cursor[cursor_in_cursor] == strlen(c_key[cursor_in_cursor]) )
 		{
 			cursor[cursor_in_cursor] = 0;
 			cursor_in_cursor--;
@@ -87,6 +100,12 @@ void c_validate(char **input_name, char **key_lenght)
 		}
 		cursor_in_cursor = atoi(*key_lenght)-1;
 	}
+
+	for ( int i = 0; i < n; ++i )
+	{
+		printf("%s ", key_list[i]);
+	}
+	printf("\n");
 
 	
 	for ( int i = 0; i < atoi(*key_lenght); ++i )

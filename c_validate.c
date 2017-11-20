@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include <time.h>
 
 #include "cipher.h"
 #include "checkascii.h"
@@ -39,6 +38,16 @@ void get_c_key(char **c_key, char **key_lenght, char **input_name)
 		}
 		fseek(c_key_file, 0, SEEK_SET);
 	}
+	for ( int i = 0; i < atoi(*key_lenght); ++i )
+	{
+		printf("[");
+		for ( int j = 0; j < strlen(c_key[i]); ++j )
+		{
+			printf("%c", c_key[i][j]);
+		}
+		printf("]");
+	}
+	printf("\n");
 }
 
 void combination_arrays(char **key_lenght, int n, int *cursor, char **key_list, char **c_key)
@@ -72,8 +81,6 @@ void combination_arrays(char **key_lenght, int n, int *cursor, char **key_list, 
 
 void c_validate(char **input_name, char **key_lenght)
 {
-	clock_t start = clock();
-		
 	/*
 	 * Liste les caracteres possibles pour la clé
 	 */
@@ -107,19 +114,17 @@ void c_validate(char **input_name, char **key_lenght)
 	
 	combination_arrays(key_lenght, n, cursor, key_list, c_key);
 
-	clock_t end = clock();
 	for ( int i = 0; i < n; ++i )
 	{
 		printf("%s ", key_list[i]);
 	}
 	printf("\n");
-	printf("En seulement %f secondes faut le savoir hein !\n", (double)(end-start)/CLOCKS_PER_SEC);
 
-	
+	/*	
 	for ( int i = 0; i < atoi(*key_lenght); ++i )
 	{
 		free(c_key[i]);
 	}
 	free(c_key);
-	
+	free(cursor);*/
 }

@@ -47,6 +47,10 @@ unsigned char checkopt(char **input_name, char **output_name, char **key, char *
 	}
 	else if ( *input_name != NULL && *mode != NULL && *output_name == NULL && *key == NULL )
 	{
+		if ( *key_lenght == NULL )
+		{
+			*key_lenght = "0";
+		}
 		// Cassage
 		opt_mode = 1;
 	}

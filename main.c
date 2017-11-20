@@ -29,11 +29,25 @@ int main(int argc, char *argv[])
 		xor_cipher(&input_name, key, &output_name);
 		end = clock();
 		printf("En %f secondes faut le savoir hein !\n", (double)(end-start)/CLOCKS_PER_SEC);
-
 	}
 	else
 	{
-		c_validate(&input_name, &key_lenght);
+		start = clock();
+		if ( atoi(key_lenght) > 0 )
+		{
+			c_validate(&input_name, &key_lenght);
+		}
+		else
+		{
+			for ( int i = 3; i < 8; ++i )
+			{
+				printf("%d\n", i);
+				key_lenght = "5";
+				c_validate(&input_name, &key_lenght);
+			}
+		}
+		end = clock();
+		printf("En %f secondes faut le savoir hein !\n", (double)(end-start)/CLOCKS_PER_SEC);
 		if ( *mode == 49 )
 		{
 			freq_analysis(&input_name);

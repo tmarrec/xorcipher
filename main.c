@@ -6,6 +6,7 @@
 #include "checkascii.h"
 #include "cipher.h"
 #include "c_validate.h"
+#include "freq_analysis.h"
 
 int main(int argc, char *argv[])
 {
@@ -26,9 +27,9 @@ int main(int argc, char *argv[])
 	else
 	{
 		c_validate(&input_name, &key_lenght);
-		if ( *mode == 1 )
+		if ( *mode == 49 )
 		{
-		
+			freq_analysis(&input_name);
 		}
 		else
 		{

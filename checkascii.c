@@ -35,6 +35,8 @@ bool checkmessage(char **input_name, unsigned int i_key, unsigned int l_key)
 				fclose(input_file);
 				return false;
 			}
+			//fseek(input_file, l_key, SEEK_CUR);
+			i_now+=l_key;
 		}		
 		i_now++;
 	}

@@ -2,12 +2,15 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
 
 #include "cipher.h"
 #include "checkascii.h"
 
 void c_validate(char **input_name, char **key_lenght)
 {
+	clock_t start = clock();
+		
 	char *output_name = "IO/output2";
 	char key[] = "";
 	char **c_key = NULL;
@@ -102,11 +105,13 @@ void c_validate(char **input_name, char **key_lenght)
 		cursor_in_cursor = atoi(*key_lenght)-1;
 	}
 
+	clock_t end = clock();
 	for ( int i = 0; i < n; ++i )
 	{
 		printf("%s ", key_list[i]);
 	}
 	printf("\n");
+	printf("En seulement %f secondes faut le savoir hein !\n", (double)(end-start)/CLOCKS_PER_SEC);
 
 	
 	for ( int i = 0; i < atoi(*key_lenght); ++i )

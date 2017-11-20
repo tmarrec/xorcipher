@@ -8,7 +8,6 @@
 
 void c_validate(char **input_name, char **key_lenght)
 {
-	printf("boi\n");
 	char *output_name = "IO/output2";
 	char key[] = "";
 	char **c_key = NULL;
@@ -22,7 +21,7 @@ void c_validate(char **input_name, char **key_lenght)
 	c_key_file = fopen("c_key", "r");
 	int c = 0;
 	unsigned char index = 0;
-	printf(">>>> %d\n", atoi(*key_lenght));
+	//printf(">>>> %d\n", atoi(*key_lenght));
 	for ( int i = 0; i < atoi(*key_lenght); ++i )
 	{
 		if ( i > 0 )
@@ -42,13 +41,14 @@ void c_validate(char **input_name, char **key_lenght)
 					c_key[i] = realloc(c_key[i], key_n*sizeof(char));
 				}
 				c_key[index][key_n-1] = c;
-				printf("key : %c \n", c);
+				//printf("key : %c \n", c);
 			}
 		}
-		printf("\n");
+		//printf("\n");
 		fseek(c_key_file, 0, SEEK_SET);
 	}
 	
+	/*
 	for ( int i = 0; i < atoi(*key_lenght); ++i )
 	{
 		for ( int j = 0; j < (int)strlen(c_key[i]); ++j )
@@ -57,6 +57,7 @@ void c_validate(char **input_name, char **key_lenght)
 		}
 		printf("\n");
 	}
+	*/
 
 	/*
 	 *	Combinaison
@@ -66,7 +67,7 @@ void c_validate(char **input_name, char **key_lenght)
 	{
 		n = n*(int)strlen(c_key[i]);
 	}
-	printf("n : %d\n", n);
+	//printf("n : %d\n", n);
 	int *cursor = NULL;
 	cursor = calloc(atoi(*key_lenght), sizeof(int));
 	char **key_list = NULL;

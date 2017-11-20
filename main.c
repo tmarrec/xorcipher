@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
 
 	readopt(argc, argv, &input_name, &output_name, &key, &mode, &key_lenght);
 	opt_mode = checkopt(&input_name, &output_name, &key, &mode, &key_lenght);
-	printf("opt_mode : %d\n", opt_mode);
 	if ( opt_mode == 0 )
 	{
 		xor_cipher(&input_name, key, &output_name);

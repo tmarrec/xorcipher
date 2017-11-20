@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	else
 	{
 		//printf("%d\n", checkmessage(&input_name));	
-		c_validate(&input_name);
+		c_validate(&input_name, &key_lenght);
 	}
 	return 0;
 }

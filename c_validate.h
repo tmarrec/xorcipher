@@ -1,1 +1,1 @@
-void c_validate(char **input_name);
+void c_validate(char **input_name, char **key_lenght);

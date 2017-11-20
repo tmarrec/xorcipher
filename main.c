@@ -26,6 +26,14 @@ int main(int argc, char *argv[])
 	else
 	{
 		c_validate(&input_name, &key_lenght);
+		if ( *mode == 1 )
+		{
+		
+		}
+		else
+		{
+			
+		}
 	}
 	return 0;
 }

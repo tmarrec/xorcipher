@@ -13,18 +13,19 @@ void get_c_key(char **c_key, char **key_lenght, char **input_name)
 	char key[] = "";
 	FILE *c_key_file;
 	c_key_file = fopen("c_key", "r");
-	int c = 0;
+	unsigned int alphabet[71] = {65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,44,45,46,58,63,95,123,125,48,49,50,51,52,53,54,55,56,57};
 	unsigned char index = 0;
+	unsigned char key_n = 0;
 	for ( int i = 0; i < atoi(*key_lenght); ++i )
 	{
 		if ( i > 0 )
 		{
 			index = atoi(*key_lenght)-i;
 		}
-		unsigned char key_n = 0;
-		while ( (c = fgetc(c_key_file)) != EOF )
+		key_n = 0;
+		for (int j = 0; j < 71; ++j )
 		{
-			key[0] = c;
+			key[0] = alphabet[j];
 			xor_cipher(input_name, key, &output_name);
 			if ( checkmessage(&output_name, i, atoi(*key_lenght)) == true )
 			{
@@ -33,7 +34,7 @@ void get_c_key(char **c_key, char **key_lenght, char **input_name)
 				{
 					c_key[i] = realloc(c_key[i], key_n*sizeof(char));
 				}
-				c_key[index][key_n-1] = c;
+				c_key[index][key_n-1] = alphabet[j];
 			}
 		}
 		fseek(c_key_file, 0, SEEK_SET);

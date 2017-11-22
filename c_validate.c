@@ -81,7 +81,7 @@ void combination_arrays(char **key_lenght, int n, int *cursor, char **key_list, 
 	free(temp);
 }
 
-unsigned int c_validate(char **input_name, char **key_lenght, char **key_list)
+char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigned int *key_list_n)
 {
 	/*
 	 * Liste les caracteres possibles pour la clé
@@ -107,13 +107,13 @@ unsigned int c_validate(char **input_name, char **key_lenght, char **key_list)
 	}
 	int *cursor = NULL;
 	cursor = calloc(atoi(*key_lenght), sizeof(int));
-	//char **key_list = NULL;
+	
 	key_list = malloc(n*sizeof(char**));
 	for ( int i = 0; i < n; ++i )
 	{
 		key_list[i] = malloc(atoi(*key_lenght)*sizeof(char*));
 	}
-	
+
 	combination_arrays(key_lenght, n, cursor, key_list, c_key);
 
 	for ( int i = 0; i < n; ++i )
@@ -129,10 +129,7 @@ unsigned int c_validate(char **input_name, char **key_lenght, char **key_list)
 	free(c_key);
 	
 	free(cursor);
-	for ( int i = 0; i < n; ++i )
-	{
-		free(key_list[i]);
-	}
-	free(key_list);
-	return n;
+
+	*key_list_n = n;
+	return key_list;
 }

@@ -19,8 +19,7 @@ int main(int argc, char *argv[])
 	unsigned char opt_mode = 0;
 	
 	char **key_list = NULL;
-	unsigned int n = 0;
-	
+	unsigned int *key_list_n = malloc(sizeof(unsigned int));
 
 	clock_t start = 0;
 	clock_t end = 0;
@@ -39,7 +38,7 @@ int main(int argc, char *argv[])
 		start = clock();
 		if ( atoi(key_lenght) > 0 )
 		{
-			n = c_validate(&input_name, &key_lenght, key_list);
+			key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n);
 		}
 		else
 		{
@@ -47,7 +46,7 @@ int main(int argc, char *argv[])
 			for ( int i = 3; i < 8; ++i )
 			{
 				key_lenght[0] = i+'0';
-				n = c_validate(&input_name, &key_lenght, key_list);
+				key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n);
 			}
 		}
 		end = clock();
@@ -56,7 +55,7 @@ int main(int argc, char *argv[])
 		{
 			if ( atoi(key_lenght) > 0 )
 			{
-				freq_analysis(&input_name, &key_lenght, key_list, n);
+				freq_analysis(&input_name, &key_lenght, key_list, key_list_n);
 			}
 		}
 		else

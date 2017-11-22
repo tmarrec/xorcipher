@@ -3,7 +3,7 @@ CFLAGS=-Wall
 OBJ=options.o checkascii.o cipher.o c_validate.o freq_analysis.o main.o
 
 util: $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o xorcipher
+	$(CC) $(CFLAGS) $(OBJ) -o xorcipher -lm
 
 options.o: options.c
 checkascii.o: checkascii.c

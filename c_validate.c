@@ -38,6 +38,7 @@ void get_c_key(char **c_key, char **key_lenght, char **input_name)
 		}
 		fseek(c_key_file, 0, SEEK_SET);
 	}
+	fclose(c_key_file);
 	for ( int i = 0; i < atoi(*key_lenght); ++i )
 	{
 		printf("[");
@@ -77,6 +78,7 @@ void combination_arrays(char **key_lenght, int n, int *cursor, char **key_list, 
 		}
 		cursor_in_cursor = atoi(*key_lenght)-1;
 	}
+	free(temp);
 }
 
 void c_validate(char **input_name, char **key_lenght)
@@ -86,10 +88,10 @@ void c_validate(char **input_name, char **key_lenght)
 	 */
 
 	char **c_key = NULL;
-	c_key = (char**)malloc(atoi(*key_lenght)*sizeof(char*));
+	c_key = (char**)calloc(atoi(*key_lenght),sizeof(char*));
 	for ( int i = 0; i < atoi(*key_lenght); ++i )
 	{
-		c_key[i] = (char*)malloc(1*sizeof(char));
+		c_key[i] = (char*)calloc(1,sizeof(char));
 	}
 
 	get_c_key(c_key, key_lenght, input_name);
@@ -120,11 +122,18 @@ void c_validate(char **input_name, char **key_lenght)
 	}
 	printf("\n");
 
-	/*	
+		
 	for ( int i = 0; i < atoi(*key_lenght); ++i )
 	{
 		free(c_key[i]);
 	}
 	free(c_key);
-	free(cursor);*/
+	
+	free(cursor);
+	for ( int i = 0; i < n; ++i )
+	{
+		free(key_list[i]);
+	}
+	free(key_list);
+	
 }

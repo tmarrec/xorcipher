@@ -39,10 +39,10 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
+			key_lenght = malloc(1*sizeof(int));
 			for ( int i = 3; i < 8; ++i )
 			{
-				printf("%d\n", i);
-				key_lenght = "5";
+				key_lenght[0] = i+'0';
 				c_validate(&input_name, &key_lenght);
 			}
 		}

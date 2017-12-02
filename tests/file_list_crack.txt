@@ -1,0 +1,3 @@
+bovary-isolatin1.txt
+mini.txt
+moyen.txt

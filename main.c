@@ -35,26 +35,30 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		start = clock();
-		if ( atoi(key_lenght) > 0 )
+		if ( *mode == 49 )
 		{
-			key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n);
-		}
-		else
-		{
-			key_lenght = malloc(1*sizeof(int));
-			for ( int i = 3; i < 8; ++i )
+			start = clock();
+			if ( atoi(key_lenght) > 0 )
 			{
-				key_lenght[0] = i+'0';
 				key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n);
 			}
+			else
+			{
+				key_lenght = malloc(1*sizeof(int));
+				for ( int i = 3; i < 8; ++i )
+				{
+					key_lenght[0] = i+'0';
+					key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n);
+				}
+			}
+			end = clock();
+			//printf("En %f secondes faut le savoir hein !\n", (double)(end-start)/CLOCKS_PER_SEC);
 		}
-		end = clock();
-		printf("En %f secondes faut le savoir hein !\n", (double)(end-start)/CLOCKS_PER_SEC);
-		if ( *mode == 49 )
+		else if ( *mode == 50 )
 		{
 			if ( atoi(key_lenght) > 0 )
 			{
+				key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n);
 				freq_analysis(&input_name, &key_lenght, key_list, key_list_n);
 			}
 		}
@@ -63,5 +67,5 @@ int main(int argc, char *argv[])
 			
 		}
 	}
-	return 0;
+	return EXIT_SUCCESS;
 }

@@ -7,15 +7,13 @@
 
 void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsigned int *key_list_n)
 {
-	printf("plop\n");
 	int freq_letter_france[27] = {9.42,1.02,2.64,3.39,15.87,0.95,1.04,0.77,8.41,0.89,0.00,5.34,3.24,7.15,5.14,2.86,1.06,6.46,7.90,7.26,6.24,2.15,0.00,0.30,0.24,0.32};
-
+	unsigned int max_freq = 0;
+	unsigned int max_freq_i = 0;
 	for ( int i = 0; i < *key_list_n; ++i )
 	{
 		float *freq_letter = (float*)calloc(27, sizeof(float));
-		
-		
-		printf("%s\n", key_list[i]);
+		//printf("%s\n", key_list[i]);
 		char *output_name = "IO/temp";
 		xor_cipher(input_name, key_list[i], &output_name);
 		FILE *output_file;
@@ -49,13 +47,11 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 				freq_letter[20]++; /* U */
 			}
 			n_c++;
-		//:w
-		//printf("%c", c);
 		}
 
 		for ( int j = 0; j < 27; ++j )
 		{
-			freq_letter[i] = ((double)freq_letter[j]/(double)n_c)*100;
+			freq_letter[i] = ((float)freq_letter[j]/(float)n_c)*100;
 		}
 		
 		float d_freq = 0;
@@ -63,6 +59,11 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 		{
 			d_freq += pow((freq_letter_france[i]-freq_letter[i]),2);
 		}
-		printf("d_freq: %f\n", d_freq);
+		if ( d_freq > max_freq )
+		{
+			max_freq_i = i;
+			max_freq = d_freq;
+		}
 	}
+	printf(">> %s\n", key_list[max_freq_i]);
 }

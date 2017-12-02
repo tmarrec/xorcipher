@@ -1,0 +1,6 @@
+bovary-isolatin1.txt
+mini.txt
+moyen.txt
+accents-utf-8.txt
+chaton.jpg
+chinois-utf-8.rtf

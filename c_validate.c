@@ -12,7 +12,7 @@ void get_c_key(char **c_key, char **key_lenght, char **input_name)
 	char key[] = "";
 	FILE *c_key_file;
 	c_key_file = fopen("c_key", "r");
-	unsigned int alphabet[71] = {65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,44,45,46,58,63,95,123,125,48,49,50,51,52,53,54,55,56,57};
+	unsigned int alphabet[71] = {44,45,46,48,49,50,51,52,53,54,55,56,57,58,63,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,95,90,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,125};
 	unsigned char index = 0;
 	unsigned char key_n = 0;
 	for ( int i = 0; i < atoi(*key_lenght); ++i )
@@ -39,6 +39,25 @@ void get_c_key(char **c_key, char **key_lenght, char **input_name)
 		fseek(c_key_file, 0, SEEK_SET);
 	}
 	fclose(c_key_file);
+	
+	/* Bubble sort */
+	/*int temp = 0;
+	for ( int x = 0; x < atoi(*key_lenght); x++ )
+	{
+		for ( int i = 0; i < strlen(c_key[i])-1; ++i )
+		{
+			for ( int j = 0; j < strlen(c_key[i])-i-1; ++j )
+			{
+				if ( c_key[x][j] > c_key[x][j+1] )
+				{
+					temp = c_key[x][j];
+					c_key[x][j] = c_key[x][j+1];
+					c_key[x][j+1] = temp;
+				}
+			}
+		}
+	}*/
+	
 	for ( int i = 0; i < atoi(*key_lenght); ++i )
 	{
 		printf("[");
@@ -115,13 +134,13 @@ char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigne
 	}
 
 	combination_arrays(key_lenght, n, cursor, key_list, c_key);
-
+	/*
 	for ( int i = 0; i < n; ++i )
 	{
 		printf("%s ", key_list[i]);
 	}
 	printf("\n");
-		
+	*/	
 	for ( int i = 0; i < atoi(*key_lenght); ++i )
 	{
 		free(c_key[i]);

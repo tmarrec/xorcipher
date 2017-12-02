@@ -8,6 +8,7 @@
 #include "cipher.h"
 #include "c_validate.h"
 #include "freq_analysis.h"
+#include "dict_analysis.h"
 
 int main(int argc, char *argv[])
 {
@@ -62,9 +63,13 @@ int main(int argc, char *argv[])
 				freq_analysis(&input_name, &key_lenght, key_list, key_list_n);
 			}
 		}
-		else
+		else 
 		{
-			
+			if ( atoi(key_lenght) > 0 )
+			{
+				key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n, false);
+				dict_analysis(&input_name, &key_lenght, key_list, key_list_n);
+			}
 		}
 	}
 	return EXIT_SUCCESS;

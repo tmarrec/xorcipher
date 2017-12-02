@@ -6,7 +6,7 @@
 #include "cipher.h"
 #include "checkascii.h"
 
-void get_c_key(char **c_key, char **key_lenght, char **input_name)
+void get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_result)
 {
 	char *output_name = "IO/temp";
 	char key[] = "";
@@ -39,35 +39,19 @@ void get_c_key(char **c_key, char **key_lenght, char **input_name)
 		fseek(c_key_file, 0, SEEK_SET);
 	}
 	fclose(c_key_file);
-	
-	/* Bubble sort */
-	/*int temp = 0;
-	for ( int x = 0; x < atoi(*key_lenght); x++ )
+	if ( print_result == true )
 	{
-		for ( int i = 0; i < strlen(c_key[i])-1; ++i )
+		for ( int i = 0; i < atoi(*key_lenght); ++i )
 		{
-			for ( int j = 0; j < strlen(c_key[i])-i-1; ++j )
+			printf("[");
+			for ( int j = 0; j < strlen(c_key[i]); ++j )
 			{
-				if ( c_key[x][j] > c_key[x][j+1] )
-				{
-					temp = c_key[x][j];
-					c_key[x][j] = c_key[x][j+1];
-					c_key[x][j+1] = temp;
-				}
+				printf("%c", c_key[i][j]);
 			}
+			printf("]");
 		}
-	}*/
-	
-	for ( int i = 0; i < atoi(*key_lenght); ++i )
-	{
-		printf("[");
-		for ( int j = 0; j < strlen(c_key[i]); ++j )
-		{
-			printf("%c", c_key[i][j]);
-		}
-		printf("]");
-	}
-	printf("\n");
+		printf("\n");
+	}	
 }
 
 void combination_arrays(char **key_lenght, int n, int *cursor, char **key_list, char **c_key)
@@ -100,7 +84,7 @@ void combination_arrays(char **key_lenght, int n, int *cursor, char **key_list, 
 	free(temp);
 }
 
-char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigned int *key_list_n)
+char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigned int *key_list_n, bool print_result)
 {
 	/*
 	 * Liste les caracteres possibles pour la clé
@@ -113,7 +97,7 @@ char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigne
 		c_key[i] = (char*)calloc(1,sizeof(char));
 	}
 
-	get_c_key(c_key, key_lenght, input_name);
+	get_c_key(c_key, key_lenght, input_name, print_result);
 
 	/*
 	 *	Combinaison des clés avec les caracteres possibles
@@ -134,7 +118,7 @@ char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigne
 	}
 
 	combination_arrays(key_lenght, n, cursor, key_list, c_key);
-	/*
+	/*	
 	for ( int i = 0; i < n; ++i )
 	{
 		printf("%s ", key_list[i]);

@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 			start = clock();
 			if ( atoi(key_lenght) > 0 )
 			{
-				key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n);
+				key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n, true);
 			}
 			else
 			{
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 				for ( int i = 3; i < 8; ++i )
 				{
 					key_lenght[0] = i+'0';
-					key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n);
+					key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n, true);
 				}
 			}
 			end = clock();
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 		{
 			if ( atoi(key_lenght) > 0 )
 			{
-				key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n);
+				key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n, false);
 				freq_analysis(&input_name, &key_lenght, key_list, key_list_n);
 			}
 		}

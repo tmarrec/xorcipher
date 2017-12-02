@@ -10,7 +10,8 @@ RET=
 
 function test_command {
     RET=0
-	if [ -x $BASE/xorcipher ]
+    
+    if [ -x $BASE/xorcipher ]
     then
 	for i in "-i" "-i -o -k" "-i toto -o tata -m 1" "-i toto -m 1 -k hello" "-i toto -o tata -k qadiejf9ejfkldos" "-i toto -o tata -k asf;"
 	do
@@ -33,7 +34,6 @@ function test_cipher {
   
 
     rm -rf $TEST/crypted/
-
     mkdir $TEST/crypted/
 
     while read k;
@@ -86,6 +86,7 @@ function test {
     [ $RET -eq 0 ] && printf "===> %-12s [${ok}OK${wipe}]\n" "$1"
     [ $RET -ne 0 ] && printf "xxx> %-12s [${ko}KO${wipe}]\n" "$1"
 }
+
 test command;
 test cipher;
 test decipher;

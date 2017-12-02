@@ -118,7 +118,7 @@ function test_crack1 {
     }
 
     function test {
-        test_$1
+       test_$1
         
         [ $RET -eq 0 ] && printf "%-12s [${ok}OK${wipe}]\n" "$1"
         [ $RET -ne 0 ] && printf "%-12s [${ko}KO${wipe}]\n" "$1"
@@ -126,7 +126,7 @@ function test_crack1 {
 
 test crack1; # validité
 test crack2; #
-#    test crack31;
-#    test crack32;
+test crack31;
+test crack32;
     
     exit 0

@@ -51,7 +51,7 @@ void get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_re
 			printf("]");
 		}
 		printf("\n");
-	}	
+	}
 }
 
 void combination_arrays(char **key_lenght, int n, int *cursor, char **key_list, char **c_key)

@@ -70,6 +70,16 @@ int main(int argc, char *argv[])
 				key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n, false);
 				dict_analysis(&input_name, &key_lenght, key_list, key_list_n);
 			}
+			else
+			{
+				key_lenght = malloc(1*sizeof(int));
+				for ( int i = 3; i < 8; ++i )
+				{
+					key_lenght[0] = i+'0';
+					key_list = c_validate(&input_name, &key_lenght, key_list, key_list_n, true);
+					dict_analysis(&input_name, &key_lenght, key_list, key_list_n);
+				}
+			}
 		}
 	}
 	return EXIT_SUCCESS;

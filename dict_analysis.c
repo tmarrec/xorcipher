@@ -32,7 +32,7 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 	french_word = (char**)calloc(336531, sizeof(char*));
 	for ( int i = 0; i < 336531; ++i )
 	{
-		french_word[i] = (char*)calloc(25,sizeof(char));
+		french_word[i] = (char*)calloc(25, sizeof(char));
 	}
 	unsigned int i = 0;
 	while ( fscanf(dict_file, "%s", french_word[i]) == 1 )
@@ -40,7 +40,6 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 		//printf("%d %s\n", i, french_word[i]);
 		i++;
 	}
-	unsigned int cursor = 336531/2;
 	unsigned int max_word = 0;
 	unsigned int right_key = 0;
 	for ( int i = 0; i < (*key_list_n); ++i )
@@ -53,15 +52,23 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 						* 25 caracteres (cf. wikipedia) 
 						*/
 		int word_count = 0;
-		while ( fscanf(output_file, "%25s", word) == 1  )
+		while ( fscanf(output_file, "%s", word) == 1  )
 		{
+			printf("word: %s\n", word);
 			word[0] = tolower(word[0]);
+			//printf("word: %s\n", word);
 			if ( binary_search(french_word, 0, 336531-1, word) == true )
 			{
+				//printf("%s ", word);
 				word_count++;
 			}
 		}
 		fclose(output_file);
+		if ( word_count == 4 )
+		{
+			//printf(" >> %s %d\n", key_list[i], word_count);
+			exit(0);
+		}
 		if ( word_count > max_word )
 		{
 			right_key = i;

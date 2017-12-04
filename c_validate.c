@@ -6,7 +6,7 @@
 #include "cipher.h"
 #include "checkascii.h"
 
-void get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_result)
+char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_result)
 {
 	char *output_name = "IO/temp";
 	char key[] = "";
@@ -44,7 +44,7 @@ void get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_re
 	{
 		if ( strlen(c_key[i]) == 0 )
 		{
-			return 0;
+			return -1;
 		}
 	}
 	if ( print_result == true )
@@ -105,7 +105,13 @@ char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigne
 		c_key[i] = (char*)calloc(1,sizeof(char));
 	}
 
-	get_c_key(c_key, key_lenght, input_name, print_result);
+	if ( get_c_key(c_key, key_lenght, input_name, print_result) == -1 )
+	{
+		key_list = calloc(1, sizeof(char**));
+		key_list[0] = calloc(1, sizeof(char*));
+		key_list[0] = "!(;)!";
+		return key_list;
+	}
 
 	/*
 	 *	Combinaison des clés avec les caracteres possibles

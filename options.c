@@ -61,7 +61,7 @@ unsigned char checkopt(char **input_name, char **output_name, char **key, char *
 		printf("	./xorcipher -i inTextFile -o outTextFile -k cle\n");
 		printf("Cassage:\n");
 		printf("	./xorcipher -i inTextFile -m mode [-l longCle]\n");
-		exit(EXIT_FAILURE);
+		exit(-1);
 	}
 
 	/*
@@ -72,7 +72,7 @@ unsigned char checkopt(char **input_name, char **output_name, char **key, char *
 	if ( (test_read_file = fopen(*input_name, "r") ) == NULL )
 	{
 		printf("Impossible d'ouvrir le fichier donne en lecture\n");
-		exit(EXIT_FAILURE);
+		exit(-1);
 	}
 
 	fclose(test_read_file);
@@ -86,7 +86,7 @@ unsigned char checkopt(char **input_name, char **output_name, char **key, char *
 		if ( checkkey(key) == false )
 		{
 			printf("La cle n'est pas valide\n");
-			exit(EXIT_FAILURE);
+			exit(-1);
 		}
 		return 0;
 	}

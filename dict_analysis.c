@@ -44,31 +44,122 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 	unsigned int right_key = 0;
 	for ( int i = 0; i < (*key_list_n); ++i )
 	{
+		//printf("\n");
 		char *output_name = "IO/temp";
 		xor_cipher(input_name, key_list[i], &output_name);
 		FILE *output_file = fopen(output_name, "r");
-		char word[25]; /* En ce basant sur le fait que le mot le plus long du francois soit
+		char word[255]; /* En ce basant sur le fait que le mot le plus long du francois soit
 						* anticonstituionellement, donc aucun mot francais ne dépassera
 						* 25 caracteres (cf. wikipedia) 
 						*/
 		int word_count = 0;
-		while ( fscanf(output_file, "%s", word) == 1  )
+		/*
+		while ( fscanf(output_file, "%[^A-Z]25s", word) == 1  )
 		{
-			printf("word: %s\n", word);
-			word[0] = tolower(word[0]);
 			//printf("word: %s\n", word);
-			if ( binary_search(french_word, 0, 336531-1, word) == true )
+			word[0] = tolower(word[0]);
+			if ( strlen(word) >= 2 && strlen(word) <= 4 )
 			{
-				//printf("%s ", word);
-				word_count++;
+				printf("%s ", word);
+				if ( binary_search(french_word, 0, 336531-1, word) == true )
+				{
+					//printf("%s ", word);
+					word_count++;
+				}
+
+			}
+		}*/
+		/*	
+		char c;
+		unsigned int j = 0;
+		while ( (c = fgetc(output_file)) != EOF )
+		{
+			if ( !((c >= 97 && c <= 122)) )
+			{
+				word[j] = 0;
+				word[0] = tolower(word[0]);
+				if ( strlen(word) >= 2 && strlen(word) <= 4 )
+				{
+					if ( binary_search(french_word, 0, 336531-1, word) == true )
+					{
+						word_count++;
+					}
+					printf("%s\n", word);
+				}
+				j = 0;
+			}
+			word[j] = c;
+			//printf("%c", c);
+			j++;
+		}*/
+		
+		char c;
+		char **word_used = NULL;
+		word_used = (char**)calloc(1, sizeof(char*));
+		word_used[0] = (char*)calloc(255, sizeof(char));
+
+		unsigned int cursor = 0;
+		unsigned int j = 0;
+		while ( (c = fgetc(output_file)) != EOF )
+		{
+			if ( !((c >= 65 && c <= 90)||(c >= 97 && c <= 122))||(c >= 65 && c <= 90 && j > 0))
+			{
+				word[j] = 0;
+				word[0] = tolower(word[0]);
+				printf("%s ", word);
+				if ( strlen(word) >= 2 && strlen(word) <= 4 )
+				{
+					if ( binary_search(french_word, 0, 336531-1, word) == true)
+					{
+						//word_used[cursor] = word;
+						/*for ( int k = 0; k < cursor; k++ )
+						{
+							if ( strcmp(word_used[k], word) == 1 )
+							{
+								printf("\n%s %s ", word_used[k], word);
+								printf("doublon");
+								exit(0);
+							}
+						}*/
+						strncpy(word_used[cursor], word, sizeof(word));
+						cursor++;
+						word_used = (char**)realloc(word_used, (cursor+1)*sizeof(char*));
+						word_used[cursor] = (char*)calloc(255, sizeof(char));
+						//printf("%s ", word);
+						word_count++;
+					}
+				}
+				j = 0;
+				if ( c >= 65 && c <= 90 )
+				{
+					word[j] = c;
+					j++;
+				}
+			}
+			else
+			{
+				word[j] = c;
+				j++;
 			}
 		}
-		fclose(output_file);
-		if ( word_count == 4 )
+		/*printf(">> ");
+		for ( int lol = 0; lol < cursor; ++lol )
 		{
-			//printf(" >> %s %d\n", key_list[i], word_count);
+			printf("%s ", word_used[lol]);
+		}*/
+		fclose(output_file);
+		if ( 1 )
+		{
+			printf(" >> %s %d\n", key_list[i], word_count);
+			printf("\n");
+			//exit(0);
+		}
+		//GcfYeh
+		if ( strcmp(key_list[i],"GcfYeh") == 0)
+		{
 			exit(0);
 		}
+
 		if ( word_count > max_word )
 		{
 			right_key = i;

@@ -106,7 +106,7 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 			{
 				word[j] = 0;
 				word[0] = tolower(word[0]);
-				printf("%s ", word);
+				//printf("%s ", word);
 				if ( strlen(word) >= 2 && strlen(word) <= 4 )
 				{
 					if ( binary_search(french_word, 0, 336531-1, word) == true)
@@ -150,14 +150,14 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 		fclose(output_file);
 		if ( 1 )
 		{
-			printf(" >> %s %d\n", key_list[i], word_count);
-			printf("\n");
+			//printf(" >> %s %d\n", key_list[i], word_count);
+			//printf("\n");
 			//exit(0);
 		}
 		//GcfYeh
 		if ( strcmp(key_list[i],"GcfYeh") == 0)
 		{
-			exit(0);
+			//exit(0);
 		}
 
 		if ( word_count > max_word )

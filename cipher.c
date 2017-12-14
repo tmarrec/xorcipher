@@ -13,6 +13,7 @@ void xor_cipher(char **input_name, char key[], char **output_name)
 	int c = 0;
 	int i = 0;
 	char ascii_c = 0;
+	
 	while ( (c = fgetc(input_file)) != EOF )
 	{
 		ascii_c = key[i];

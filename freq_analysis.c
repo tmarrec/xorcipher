@@ -6,25 +6,7 @@
 #include <stdbool.h>
 
 #include "cipher.h"
-
-char* read_file2(char **input_name) //TODO Faire cette fonction sur un autre .c
-{
-	FILE *input_file;
-	input_file = fopen(*input_name, "r");
-	fseek(input_file, 0L, SEEK_END);
-	char *file_text = calloc(ftell(input_file), sizeof(char));
-	fseek(input_file, 0L, SEEK_SET);
-	int c;
-	int i = 0;
-	//TODO Optimiser avec fread?
-	while ( (c = fgetc(input_file)) != EOF )
-	{
-		file_text[i++] = c;
-	}
-	file_text[i] = '\0';
-	fclose(input_file);
-	return file_text;
-}
+#include "read_file.h"
 
 void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsigned int *key_list_n)
 {
@@ -33,7 +15,7 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 	unsigned int min_freq_i = 0;
 
 	char *file_text = NULL;
-	file_text = read_file2(input_name);
+	file_text = read_file(input_name);
 	FILE *input_file;
 	input_file = fopen(*input_name, "r");
 	fseek(input_file, 0l, SEEK_END);
@@ -41,13 +23,17 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 	fclose(input_file);
 	char *file_ciphered = calloc(file_size, sizeof(char));
 
+	unsigned int n_c = 0;
+	int c = 0;
+	bool good_c = true;
+
 	for ( int i = 0; i < (*key_list_n); ++i )
 	{
 		float *freq_letter = (float*)calloc(27, sizeof(float));
 		file_ciphered = xor_cipher_return(file_text, key_list[i], file_size);
-		unsigned int n_c = 0;	
-		int c = 0;
-		bool good_c = true;
+		n_c = 0;	
+		c = 0;
+		good_c = true;
 		
 		for ( int i = 0; i < file_size; ++i )
 		{
@@ -111,7 +97,6 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 			min_freq_i = i;
 			min_freq = d_freq;
 		}
-		//printf("%f %d\n", d_freq, ++test);		
 	}
 	for ( int i = 0; i < atoi(*key_lenght); ++i )
 	{

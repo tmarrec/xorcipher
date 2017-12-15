@@ -6,6 +6,13 @@ then
 else
 	i=0
 	sum=0
+	min=0
+	max=0
+	if [ $# -eq 1 ]
+	then
+		echo "  | Pass | Time  |"
+		echo "  |------|-------|"
+	fi
 	while [ $i -ne $1 ]
 	do
 		start=`date +%s%N | cut -b1-13`
@@ -14,9 +21,23 @@ else
 		timer=`expr $end - $start`
 		i=`expr $i + 1`
 		sum=`expr $sum + $timer`
+		if [ $i -eq 1 ]
+		then
+			min=$timer
+			max=$timer
+		elif [ $timer -gt $max ]
+		then
+			max=$timer
+		elif [ $timer -lt $min ]
+		then
+			min=$timer
+		fi
+		if [ $# -eq 1 ]
+		then
+			printf "  | %04d | %d ms |\n" $i $timer
+		fi
 	done
-	echo
 	moy=`expr $sum / $1`
-	echo Moyenne : $moy ms.
+	echo "Moyenne : $moy ms | Min : $min ms (-$(( $moy - $min  ))) | Max : $max ms (+$(( $max - $moy )))"
 	fi
 exit 0

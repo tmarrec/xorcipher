@@ -5,25 +5,7 @@
 
 #include "cipher.h"
 #include "checkascii.h"
-
-char* read_file(char **input_name)
-{
-	FILE *input_file;
-	input_file = fopen(*input_name, "r");
-	fseek(input_file, 0L, SEEK_END);
-	char *file_text = calloc(ftell(input_file), sizeof(char));
-	fseek(input_file, 0L, SEEK_SET);
-	int c;
-	int i = 0;
-	//TODO Optimiser avec fread?
-	while ( (c = fgetc(input_file)) != EOF )
-	{
-		file_text[i++] = c;
-	}
-	file_text[i] = '\0';
-	fclose(input_file);
-	return file_text;
-}
+#include "read_file.h"
 
 char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_result)
 {
@@ -163,11 +145,11 @@ char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigne
 	}
 	printf("\n");
 	*/	
-	/*for ( int i = 0; i < atoi(*key_lenght); ++i )
+	for ( int i = 0; i < atoi(*key_lenght); ++i )
 	{
 		free(c_key[i]);
 	}
-	free(c_key);*/
+	free(c_key);
 	
 	free(cursor);
 	

@@ -9,9 +9,11 @@ char* xor_cipher_return(char *file_text, char key[], int file_size)
 	int j;
 	for ( j = 0; j < file_size; ++j )
 	{
-		//printf("%c", key[i]^file_text[j]);
 		file_ciphered[j] = key[i]^file_text[j];
-		//printf("%c", file_ciphered[j]);
+		/*if ( file_ciphered[j] >= 65 && file_ciphered[j] <= 90 )
+		{
+			file_ciphered[j] = tolower(file_ciphered[j]);
+		}*/
 		if ( i < strlen(key)-1 )
 		{
 			++i;

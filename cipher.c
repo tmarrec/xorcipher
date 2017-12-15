@@ -2,6 +2,29 @@
 #include <stdlib.h>
 #include <string.h>
 
+char* xor_cipher_return(char *file_text, char key[], int file_size)
+{
+	char *file_ciphered = calloc(file_size, sizeof(char));
+	int i = 0;
+	int j;
+	for ( j = 0; j < file_size; ++j )
+	{
+		//printf("%c", key[i]^file_text[j]);
+		file_ciphered[j] = key[i]^file_text[j];
+		//printf("%c", file_ciphered[j]);
+		if ( i < strlen(key)-1 )
+		{
+			++i;
+		}
+		else
+		{
+			i = 0;
+		}
+	}
+	file_ciphered[j] = '\0';
+	return file_ciphered;
+}
+
 void xor_cipher(char **input_name, char key[], char **output_name)
 {
 	FILE *input_file;

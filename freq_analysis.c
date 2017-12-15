@@ -19,7 +19,7 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 	FILE *input_file;
 	input_file = fopen(*input_name, "r");
 	fseek(input_file, 0l, SEEK_END);
-	int file_size = ftell(input_file);
+	unsigned int file_size = ftell(input_file);
 	fclose(input_file);
 	char *file_ciphered = calloc(file_size, sizeof(char));
 
@@ -27,7 +27,7 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 	int c = 0;
 	bool good_c = true;
 
-	for ( int i = 0; i < (*key_list_n); ++i )
+	for ( unsigned int i = 0; i < (*key_list_n); ++i )
 	{
 		float *freq_letter = (float*)calloc(27, sizeof(float));
 		file_ciphered = xor_cipher_return(file_text, key_list[i], file_size);
@@ -35,42 +35,53 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 		c = 0;
 		good_c = true;
 		
-		for ( int i = 0; i < file_size; ++i )
+		for ( unsigned int j = 0; j < file_size; ++j )
 		{
-			c = file_ciphered[i];
+			c = file_ciphered[j];
 			if ( c < 0 )
 			{
 				c += 256;
 			}
-			
-			if ( tolower(c) >= 97 && tolower(c) <= 122 )
+
+			switch(c)
 			{
-				freq_letter[tolower(c)-97]++;
+				case 65 ... 90:
+					freq_letter[tolower(c)-97]++;
+					break;
+
+				case 97 ... 122:
+					freq_letter[c-97]++;
+					break;
+
+				case 192 ... 194:
+				case 224 ... 226:
+					freq_letter[0]++; // A
+					break;
+
+				case 200 ... 202:
+				case 232 ... 234:
+					freq_letter[4]++; // E
+					break;
+
+				case 204 ... 206:
+				case 236 ... 238:
+					freq_letter[8]++; // I 
+					break;
+
+				case 210 ... 212:
+				case 242 ... 244:
+					freq_letter[14]++; // O
+					break;
+				
+				case 218 ... 219:
+				case 249 ... 251:
+					freq_letter[20]++; // U
+					break;
+
+				default:
+					good_c = false;
 			}
-			else if ( (c >= 192 && c <= 194)||(c >= 224 && c <= 226) )
-			{
-				freq_letter[0]++; // A 
-			}
-			else if ( (c >= 200&&c <= 202)||(c >= 232&&c <= 234) )
-			{	
-				freq_letter[4]++; // E 
-			}
-			else if ( (c >= 204&&c <= 206)||(c >= 236&&c <= 238) )
-			{	
-				freq_letter[8]++; // I 
-			}
-			else if ( (c >= 210&&c <= 212)||(c >= 242&&c <= 244) )
-			{
-				freq_letter[14]++; // O
-			}
-			else if ( (c >= 218&&c <= 219)||(c >= 249&&c <= 251) )
-			{	
-				freq_letter[20]++; // U
-			}
-			else
-			{
-				good_c = false;
-			}
+
 			if ( good_c == true )
 			{
 				n_c++;

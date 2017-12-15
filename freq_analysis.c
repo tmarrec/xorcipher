@@ -26,11 +26,11 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 	unsigned int n_c = 0;
 	int c = 0;
 	bool good_c = true;
+	float *freq_letter = (float*)calloc(27, sizeof(float));
 
 	for ( unsigned int i = 0; i < (*key_list_n); ++i )
 	{
-		float *freq_letter = (float*)calloc(27, sizeof(float));
-		file_ciphered = xor_cipher_return(file_text, key_list[i], file_size);
+		file_ciphered = xor_cipher_return(file_text, key_list[i], file_size, atoi(*key_lenght));
 		n_c = 0;	
 		c = 0;
 		good_c = true;
@@ -42,7 +42,7 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 			{
 				c += 256;
 			}
-
+			
 			switch(c)
 			{
 				case 65 ... 90:
@@ -86,19 +86,20 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 			{
 				n_c++;
 			}
-			good_c = true;
-		}
-
-		for ( int j = 0; j < 27; ++j )
-		{
-			freq_letter[j] = ((float)freq_letter[j]/(float)n_c)*100;
+			else
+			{
+				good_c = true;
+			}
 		}
 		
 		float d_freq = 0;
-		for ( int j = 0; j < 27; j++ )
+		for ( unsigned int j = 0; j < 27; ++j )
 		{
+			freq_letter[j] = (freq_letter[j]/n_c)*100;
 			d_freq += pow((freq_letter_france[j]-freq_letter[j]),2);
+			freq_letter[j] = 0;
 		}
+		
 		if ( min_freq == 0 )
 		{
 			min_freq = d_freq;
@@ -109,7 +110,7 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 			min_freq = d_freq;
 		}
 	}
-	for ( int i = 0; i < atoi(*key_lenght); ++i )
+	for ( unsigned int i = 0; i < atoi(*key_lenght); ++i )
 	{
 		printf("%c", key_list[min_freq_i][i]);
 	}

@@ -10,8 +10,9 @@ else
 	max=0
 	if [ $# -eq 1 ]
 	then
-		echo "  | Pass | Time  |"
-		echo "  |------|-------|"
+		echo
+		echo "  | Pass |  Time  |"
+		echo "  |------|--------|"
 	fi
 	while [ $i -ne $1 ]
 	do
@@ -38,6 +39,7 @@ else
 		fi
 	done
 	moy=`expr $sum / $1`
-	echo "Moyenne : $moy ms | Min : $min ms (-$(( $moy - $min  ))) | Max : $max ms (+$(( $max - $moy )))"
+	echo
+	echo "Average : $moy ms | Min : $min ms (-$(( $moy - $min  ))) | Max : $max ms (+$(( $max - $moy )))"
 	fi
 exit 0

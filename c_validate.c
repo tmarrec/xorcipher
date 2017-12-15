@@ -23,22 +23,18 @@ char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_re
 	int file_size = ftell(input_file);
 	fclose(input_file);
 	char *file_ciphered = calloc(file_size, sizeof(char));
-	
-	for ( int i = 0; i < atoi(*key_lenght); ++i )
+	int int_key_lenght = atoi(*key_lenght);
+	for ( unsigned int i = 0; i < atoi(*key_lenght); ++i )
 	{
 		key_n = 0;
-		for (int j = 0; j < 70; ++j )
+		for ( unsigned int j = 0; j < 70; ++j )
 		{
 			key[0] = alphabet[j];
-			file_ciphered = xor_cipher_return(file_text, key, file_size);
-			if ( checkmessage_opt(file_ciphered, i, atoi(*key_lenght), file_size) == true )
+			file_ciphered = xor_cipher_return(file_text, key, file_size, 1);
+			if ( checkmessage_opt(file_ciphered, i, int_key_lenght, file_size) == true )
 			{
+				c_key[i][key_n] = alphabet[j];
 				key_n++;
-				if ( key_n > 1)
-				{
-					c_key[i] = realloc(c_key[i], key_n*sizeof(char));
-				}
-				c_key[i][key_n-1] = alphabet[j];
 			}
 		}
 		c_key[i][key_n] = '\0';
@@ -108,7 +104,7 @@ char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigne
 	c_key = (char**)calloc(atoi(*key_lenght), sizeof(char*));
 	for ( unsigned char i = 0; i < atoi(*key_lenght); ++i )
 	{
-		c_key[i] = (char*)calloc(1,sizeof(char));
+		c_key[i] = (char*)calloc(71, sizeof(char));
 	}
 
 	if ( get_c_key(c_key, key_lenght, input_name, print_result) == -1 )

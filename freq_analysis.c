@@ -28,9 +28,11 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 	bool good_c = true;
 	float *freq_letter = (float*)calloc(27, sizeof(float));
 
+	int int_key_lenght = atoi(*key_lenght);
+
 	for ( unsigned int i = 0; i < (*key_list_n); ++i )
 	{
-		file_ciphered = xor_cipher_return(file_text, key_list[i], file_size, atoi(*key_lenght));
+		file_ciphered = xor_cipher_return(file_text, key_list[i], file_size, int_key_lenght);
 		n_c = 0;	
 		c = 0;
 		good_c = true;
@@ -95,8 +97,7 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 		float d_freq = 0;
 		for ( unsigned int j = 0; j < 27; ++j )
 		{
-			freq_letter[j] = (freq_letter[j]/n_c)*100;
-			d_freq += pow((freq_letter_france[j]-freq_letter[j]),2);
+			d_freq += pow((freq_letter_france[j]-((freq_letter[j]/n_c)*100)),2);
 			freq_letter[j] = 0;
 		}
 		
@@ -110,7 +111,7 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 			min_freq = d_freq;
 		}
 	}
-	for ( unsigned int i = 0; i < atoi(*key_lenght); ++i )
+	for ( unsigned int i = 0; i < int_key_lenght; ++i )
 	{
 		printf("%c", key_list[min_freq_i][i]);
 	}

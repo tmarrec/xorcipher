@@ -9,9 +9,22 @@ bool checkkey(char **key)
 	for ( unsigned char i = 0; i < strlen(*key); ++i )
 	{
 		ascii_c = (char)*(*key+i);
-		if (!((ascii_c >= 65 && ascii_c <= 90)||(ascii_c >= 97 && ascii_c <= 122)||(ascii_c >= 44 && ascii_c <= 46 )||(ascii_c == 58)||(ascii_c == 63)||(ascii_c == 95)||(ascii_c == 123)||(ascii_c == 125)||(ascii_c >= 48 && ascii_c <= 57)))
+		
+		/*if (!((ascii_c >= 65 && ascii_c <= 90)||(ascii_c >= 97 && ascii_c <= 122)||(ascii_c >= 44 && ascii_c <= 46 )||(ascii_c == 58)||(ascii_c == 63)||(ascii_c == 95)||(ascii_c == 123)||(ascii_c == 125)||(ascii_c >= 48 && ascii_c <= 57)))
 		{
 			return false;
+		}*/
+		switch(ascii_c)
+		{
+			case 0 ... 43:
+		 	case 47:
+			case 59 ... 62:
+			case 64:
+			case 91 ... 96:
+			case 124:
+			case 126 ... 127:
+				return false;
+				break;
 		}
 	}
 	return true;

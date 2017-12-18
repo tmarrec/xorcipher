@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall
+CFLAGS=-Ofast -Wall
 OBJ=options.o checkascii.o cipher.o c_validate.o freq_analysis.o dict_analysis.o read_file.o main.o
 
 util: $(OBJ)

@@ -7,6 +7,7 @@
 #include "checkascii.h"
 #include "read_file.h"
 
+
 char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_result, int int_key_lenght)
 {
 	char key[] = "";
@@ -21,6 +22,7 @@ char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_re
 	int file_size = ftell(input_file);
 	fclose(input_file);
 	char *file_ciphered = calloc(file_size, sizeof(char));
+	//int *c_key_size = calloc(10, sizeof(int));
 	for ( unsigned int i = 0; i < int_key_lenght; ++i )
 	{
 		key_n = 0;
@@ -34,24 +36,31 @@ char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_re
 				key_n++;
 			}
 		}
+		if ( key_n == 0 )
+		{
+			return -1;
+		}
+		//c_key_size[i] = key_n;
 		c_key[i][key_n] = '\0';
 	}
-	for ( int i = 0; i < atoi(*key_lenght); ++i )
+	/*
+	for ( int i = 0; i < int_key_lenght; ++i )
 	{
 		if ( strlen(c_key[i]) == 0 )
 		{
 			return -1;
 		}
-	}
+	}*/
 	if ( print_result == true )
 	{
-		for ( int i = 0; i < atoi(*key_lenght); ++i )
+		for ( int i = 0; i < int_key_lenght; ++i )
 		{
 			printf("[");
-			for ( int j = 0; j < strlen(c_key[i]); ++j )
+			/*for ( int j = 0; j < strlen(c_key[i]); ++j )
 			{
 				printf("%c", c_key[i][j]);
-			}
+			}*/
+			printf("%s", c_key[i]);
 			printf("]");
 		}
 		printf("\n");
@@ -92,9 +101,8 @@ char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigne
 	/*
 	 * Liste les caracteres possibles pour la clé
 	 */
-
 	int int_key_lenght = atoi(*key_lenght);
-
+	
 	char **c_key = NULL;
 	c_key = (char**)calloc(int_key_lenght, sizeof(char*));
 	for ( unsigned char i = 0; i < int_key_lenght; ++i )

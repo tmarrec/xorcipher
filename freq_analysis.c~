@@ -56,37 +56,27 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 					break;
 
 				case 192 ... 194:
-				case 196:
-				case 224 ... 228:
+				case 224 ... 226:
 					freq_letter[0]++; // A
 					break;
 
-				case 200 ... 203:
-				case 232 ... 235:
+				case 200 ... 202:
+				case 232 ... 234:
 					freq_letter[4]++; // E
 					break;
 
-				case 199:
-				case 131:
-					freq_letter[2]++; // C
-					break;
-
-				case 206 ... 207:
-				case 238 ... 239:
+				case 204 ... 206:
+				case 236 ... 238:
 					freq_letter[8]++; // I 
 					break;
 
-				case 212:
-				case 214:
-				case 244:
-				case 246:
+				case 210 ... 212:
+				case 242 ... 244:
 					freq_letter[14]++; // O
 					break;
 				
-				case 217:
-				case 219:
-				case 249:
-				case 251:
+				case 218 ... 219:
+				case 249 ... 251:
 					freq_letter[20]++; // U
 					break;
 

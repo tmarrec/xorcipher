@@ -20,7 +20,8 @@ bool checkkey(char **key)
 		 	case 47:
 			case 59 ... 62:
 			case 64:
-			case 91 ... 96:
+			case 91 ... 94:
+			case 96:
 			case 124:
 			case 126 ... 127:
 				return false;

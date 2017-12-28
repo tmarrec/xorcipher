@@ -71,7 +71,7 @@ char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigne
 	 * Liste les caracteres possibles pour la clé
 	 */
 	int int_key_lenght = atoi(*key_lenght);
-	printf("ok");
+	//printf("ok");
 	char **c_key = NULL;
 	c_key = (char**)calloc(int_key_lenght, sizeof(char*));
 	for ( unsigned char i = 0; i < int_key_lenght; ++i )

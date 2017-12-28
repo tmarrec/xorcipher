@@ -81,7 +81,6 @@ int main(int argc, char *argv[])
 					}*/
 					if ( c_key[0] != 0 )
 					{
-						printf("looool");
 						freq_analysis(&input_name, &key_lenght, key_list, key_list_n);
 					}
 				}

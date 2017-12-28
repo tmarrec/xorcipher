@@ -71,7 +71,8 @@ function test_crack1 {
         while read k
         do
         while read i
-        do
+		do
+		#echo ${k}_${i} ${#k}
         $BASE/xorcipher -i $TEST/crypted_crack/${k}_${i} -m 3 -l ${#k} > $TEST/keys2/${k}_${i}
         diff $TEST/keys2/${k}_${i} $TEST/ref_keys2/${k}_${i} &>/dev/null
         RET=$?
@@ -126,7 +127,7 @@ function test_crack1 {
 
 test crack1; # validité
 test crack2; #
-#test crack31;
-#test crack32;
+test crack31;
+test crack32;
     
 exit 0

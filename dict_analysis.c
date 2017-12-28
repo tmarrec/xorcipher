@@ -8,25 +8,6 @@
 #include "cipher.h"
 #include "read_file.h"
 
-// Unused
-bool binary_search(char **french_word, int l, int r, char *word)
-{
-	unsigned int m = 0;
-	if ( r >= l )
-	{
-		m = l+(r-l)/2;
-		if ( strcmp(french_word[m], word) == 0 )
-		{
-			return true;
-		}
-		else if ( strcmp(french_word[m], word) > 0 )
-		{
-			return binary_search(french_word, l, m-1,  word);
-		}
-		return binary_search(french_word, m+1, r, word);
-	}
-	return false;
-}
 
 unsigned long get_hash(char *word)
 {
@@ -49,6 +30,7 @@ void fill_hash_table(bool *french_word_hash_table)
 		if ( c == 10 && i <= 4 && i >= 2)
 		{
 			french_word_hash_table[somme] = true;
+			//printf("%lu\n", somme);
 			i = 0;
 			somme = 0;
 		}
@@ -65,8 +47,6 @@ void fill_hash_table(bool *french_word_hash_table)
 	}
 	fclose(dict_file);
 }
-
-
 
 void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsigned int *key_list_n)
 {
@@ -92,12 +72,58 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 	unsigned char int_key_lenght = atoi(*key_lenght);
 	int c;
 	unsigned char j = 0;
-	char word[255];
+	char word[1024];
 	unsigned long counter = 0;
 	unsigned long max_counter = 0;
 	unsigned long max_i = 0;
 
-	for ( int i = 0; i < (*key_list_n); ++i )
+	for (int i = 0; i < (*key_list_n); ++i )
+	{
+		file_ciphered = xor_cipher_return(file_text, key_list[i], file_size, int_key_lenght);
+		for ( unsigned long cursor = 0; cursor < file_size; ++cursor)
+		{
+			//printf("%c", c);
+			c = file_ciphered[cursor];
+			if ( c < 0 )
+			{
+				c += 256;
+			}
+			if ( c == 32 || c == 13 || c == 44 || c == 46 || c == 58 || c == 59 || c == 34 || c == 63 || c == 33 )
+			{
+				word[j] = 0;
+				j = 0;
+				if ( strlen(word) >= 2 && strlen(word) <= 4 )
+				{
+					word[0] = tolower(word[0]);
+					//printf("%s ", word);
+					if ( french_word_hash_table[get_hash(word)] == true )
+					{
+						//printf("%s ", word);
+						counter++;
+					}
+				}
+			}
+			else
+			{
+				word[j] = c;
+				j++;
+			}
+		}
+		if ( counter > max_counter )
+		{
+			max_counter = counter;
+			max_i = i;
+		}
+		counter = 0;
+
+		/*if ( strcmp(key_list[i], "adijd") == 0 )
+		{
+			printf("lol");
+			exit(0);		
+		}*/
+	}
+	printf("%s\n", key_list[max_i]);
+	/*for ( int i = 0; i < (*key_list_n); ++i )
 	{
 		counter = 0;
 		file_ciphered = xor_cipher_return(file_text, key_list[i], file_size, int_key_lenght);
@@ -161,7 +187,7 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 		}
 	}
 	printf("%s\n", key_list[max_i]);
-
+	*/
 
 	/*FILE *dict_file = fopen("dict.txt", "r");
 	char **french_word = NULL;

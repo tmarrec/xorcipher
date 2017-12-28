@@ -6,7 +6,7 @@
 #include "cipher.h"
 #include "checkascii.h"
 #include "read_file.h"
-
+#include "combination.h"
 
 char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_result, int int_key_lenght)
 {
@@ -41,7 +41,7 @@ char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_re
 			return -1;
 		}
 		//c_key_size[i] = key_n;
-		c_key[i][key_n] = '\0';
+		c_key[i][key_n] = 0;
 	}
 	/*
 	for ( int i = 0; i < int_key_lenght; ++i )
@@ -56,10 +56,6 @@ char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_re
 		for ( int i = 0; i < int_key_lenght; ++i )
 		{
 			printf("[");
-			/*for ( int j = 0; j < strlen(c_key[i]); ++j )
-			{
-				printf("%c", c_key[i][j]);
-			}*/
 			printf("%s", c_key[i]);
 			printf("]");
 		}
@@ -68,33 +64,6 @@ char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_re
 	return 1;
 }
 
-void combination_arrays(char **key_lenght, int n, int *cursor, char **key_list, char **c_key, int int_key_lenght)
-{	
-	char *temp = NULL;
-	temp = calloc(int_key_lenght+1, sizeof(char*));
-	
-	unsigned int cursor_in_cursor = int_key_lenght-1; // LuL
-	for ( unsigned int i = 0; i < n; ++i )
-	{
-		for ( unsigned char j = 0; j < int_key_lenght; ++j )
-		{
-			temp[j] = c_key[j][cursor[j]];
-			//key_list[i][j] = c_key[j][cursor[j]];
-		}
-		
-		strcpy(key_list[i], temp);
-
-		cursor[cursor_in_cursor]++;
-		while ( i < n-1 && cursor[cursor_in_cursor] == strlen(c_key[cursor_in_cursor]) )
-		{
-			cursor[cursor_in_cursor] = 0;
-			cursor_in_cursor--;
-			cursor[cursor_in_cursor]++;
-		}
-		cursor_in_cursor = int_key_lenght-1;
-	}
-	free(temp);
-}
 
 char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigned int *key_list_n, bool print_result)
 {
@@ -102,7 +71,7 @@ char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigne
 	 * Liste les caracteres possibles pour la clé
 	 */
 	int int_key_lenght = atoi(*key_lenght);
-	
+	printf("ok");
 	char **c_key = NULL;
 	c_key = (char**)calloc(int_key_lenght, sizeof(char*));
 	for ( unsigned char i = 0; i < int_key_lenght; ++i )
@@ -112,46 +81,12 @@ char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigne
 
 	if ( get_c_key(c_key, key_lenght, input_name, print_result, int_key_lenght) == -1 )
 	{
-		key_list = calloc(1, sizeof(char**));
+		/*key_list = calloc(1, sizeof(char**));
 		key_list[0] = calloc(1, sizeof(char*));
-		key_list[0] = "!(;)!"; // Cas où il y a pas de clé possible
-		return key_list;
+		key_list[0] = "!(;)!"; // Cas où il y a pas de clé possible*/
+		c_key[0] = 0;
+		exit(0);
+		return c_key;
 	}
-
-	/*
-	 *	Combinaison des clés avec les caracteres possibles
-	 */
-
-	unsigned int n = 1;
-	for ( unsigned char i = 0; i < int_key_lenght; ++i )
-	{
-		n = n*(int)strlen(c_key[i]);
-	}
-	int *cursor = NULL;
-	cursor = calloc(int_key_lenght, sizeof(int));
-	
-	key_list = calloc(n, sizeof(char**));
-	for ( unsigned int i = 0; i < n; ++i )
-	{
-		key_list[i] = calloc(int_key_lenght, sizeof(char*));
-	}
-
-	combination_arrays(key_lenght, n, cursor, key_list, c_key, int_key_lenght);
-	/*	
-	for ( int i = 0; i < n; ++i )
-	{
-		printf("%s ", key_list[i]);
-	}
-	printf("\n");
-	*/	
-	for ( int i = 0; i < int_key_lenght; ++i )
-	{
-		free(c_key[i]);
-	}
-	free(c_key);
-	
-	free(cursor);
-	
-	*key_list_n = n;
-	return key_list;
+	return c_key;
 }

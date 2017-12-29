@@ -76,7 +76,7 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 	unsigned long counter = 0;
 	unsigned long max_counter = 0;
 	unsigned long max_i = 0;
-
+	
 	for (int i = 0; i < (*key_list_n); ++i )
 	{
 		file_ciphered = xor_cipher_return(file_text, key_list[i], file_size, int_key_lenght);
@@ -88,25 +88,31 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 			{
 				c += 256;
 			}
-			if ( c == 32 || c == 13 || c == 44 || c == 46 || c == 58 || c == 59 || c == 34 || c == 63 || c == 33 )
+
+			switch(c)
 			{
-				word[j] = 0;
-				j = 0;
-				if ( strlen(word) >= 2 && strlen(word) <= 4 )
-				{
-					word[0] = tolower(word[0]);
-					//printf("%s ", word);
-					if ( french_word_hash_table[get_hash(word)] == true )
+				case 32 ... 34:
+				case 13:
+				case 44:
+				case 46:
+				case 58 ... 59:
+				case 63:
+					word[j] = 0;
+					j = 0;
+					if ( strlen(word) >= 2 && strlen(word) <= 4 )
 					{
+						word[0] = tolower(word[0]);
 						//printf("%s ", word);
-						counter++;
+						if ( french_word_hash_table[get_hash(word)] == true )
+						{
+							//printf("%s ", word);
+							counter++;
+						}
 					}
-				}
-			}
-			else
-			{
-				word[j] = c;
-				j++;
+					break;
+				default:
+					word[j] = c;
+					j++;
 			}
 		}
 		if ( counter > max_counter )

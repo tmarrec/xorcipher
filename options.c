@@ -91,5 +91,4 @@ unsigned char checkopt(char **input_name, char **output_name, char **key, char *
 		return 0;
 	}
 	return 1;
-
 }

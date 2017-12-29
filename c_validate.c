@@ -22,7 +22,7 @@ char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_re
 	int file_size = ftell(input_file);
 	fclose(input_file);
 	char *file_ciphered = calloc(file_size, sizeof(char));
-	//int *c_key_size = calloc(10, sizeof(int));
+	
 	for ( unsigned int i = 0; i < int_key_lenght; ++i )
 	{
 		key_n = 0;
@@ -40,17 +40,9 @@ char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_re
 		{
 			return -1;
 		}
-		//c_key_size[i] = key_n;
 		c_key[i][key_n] = 0;
 	}
 	
-	/*for ( int i = 0; i < int_key_lenght; ++i )
-	{
-		if ( strlen(c_key[i]) == 0 )
-		{
-			return -1;
-		}
-	}*/
 	if ( print_result == true )
 	{
 		for ( int i = 0; i < int_key_lenght; ++i )

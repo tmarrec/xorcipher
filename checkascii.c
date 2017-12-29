@@ -20,7 +20,6 @@ bool checkkey(char **key)
 			case 124:
 			case 126 ... 127:
 				return false;
-				break;
 		}
 	}
 	return true;

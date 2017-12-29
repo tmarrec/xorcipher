@@ -116,11 +116,6 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 		}
 		counter = 0;
 
-		/*if ( strcmp(key_list[i], "adijd") == 0 )
-		{
-			printf("lol");
-			exit(0);		
-		}*/
 	}
 	printf("%s\n", key_list[max_i]);
 }

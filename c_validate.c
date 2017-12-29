@@ -43,8 +43,8 @@ char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_re
 		//c_key_size[i] = key_n;
 		c_key[i][key_n] = 0;
 	}
-	/*
-	for ( int i = 0; i < int_key_lenght; ++i )
+	
+	/*for ( int i = 0; i < int_key_lenght; ++i )
 	{
 		if ( strlen(c_key[i]) == 0 )
 		{
@@ -65,7 +65,7 @@ char get_c_key(char **c_key, char **key_lenght, char **input_name, bool print_re
 }
 
 
-char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigned int *key_list_n, bool print_result)
+char** c_validate(char **input_name, char **key_lenght, unsigned int *key_list_n, bool print_result, bool *isok)
 {
 	/*
 	 * Liste les caracteres possibles pour la clé
@@ -78,15 +78,17 @@ char** c_validate(char **input_name, char **key_lenght, char **key_list, unsigne
 	{
 		c_key[i] = (char*)calloc(71, sizeof(char));
 	}
+	//printf("sku");
+	//exit(0);
 
 	if ( get_c_key(c_key, key_lenght, input_name, print_result, int_key_lenght) == -1 )
 	{
 		/*key_list = calloc(1, sizeof(char**));
 		key_list[0] = calloc(1, sizeof(char*));
 		key_list[0] = "!(;)!"; // Cas où il y a pas de clé possible*/
-		c_key[0] = 0;
-		exit(0);
-		return c_key;
+		//c_key[0][0] = 20;
+		//printf("lol20");
+		*isok = false;
 	}
 	return c_key;
 }

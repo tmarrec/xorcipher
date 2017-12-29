@@ -30,7 +30,7 @@ void combination_arrays(char **key_lenght, int n, int *cursor, char **key_list, 
 	free(temp);
 }
 
-char** get_key_list(char **key_lenght, char **key_list, char **c_key, unsigned int *key_list_n)
+char** get_key_list(char **key_lenght, char **c_key, unsigned int *key_list_n)
 {
 	int int_key_lenght = atoi(*key_lenght);
 	unsigned int n = 1;
@@ -41,6 +41,7 @@ char** get_key_list(char **key_lenght, char **key_list, char **c_key, unsigned i
 	int *cursor = NULL;
 	cursor = calloc(int_key_lenght, sizeof(int));
 
+	char **key_list = NULL;
 	key_list = calloc(n, sizeof(char**));
 	for ( unsigned int i = 0; i < n; ++i )
 	{

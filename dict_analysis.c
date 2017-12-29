@@ -40,6 +40,26 @@ bool is_valid_word(unsigned int j, char *word, bool *french_word_hash_table)
 	return false;
 }
 
+bool is_separator(int c)
+{
+	if ( c < 0 )
+	{
+		c += 256;
+	}
+	switch(c)
+	{
+		case 32 ... 34:
+		case 13:
+		case 44:
+		case 46:
+		case 58 ... 59:
+		case 63:
+			return true;	
+		default:
+			return false;
+	}
+}
+
 void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsigned int *key_list_n)
 {
 	bool *french_word_hash_table = NULL;
@@ -66,28 +86,19 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 		for ( unsigned long cursor = 0; cursor < file_size; ++cursor)
 		{
 			c = file_ciphered[cursor];
-			if ( c < 0 )
+			if ( is_separator(c) == true )
 			{
-				c += 256;
+				word[j] = 0;
+				if ( is_valid_word(j, word, french_word_hash_table) == true )
+				{
+					counter++;
+				}
+				j = 0;
 			}
-			switch(c)
+			else
 			{
-				case 32 ... 34:
-				case 13:
-				case 44:
-				case 46:
-				case 58 ... 59:
-				case 63:
-					word[j] = 0;
-					if ( is_valid_word(j, word, french_word_hash_table) == true )
-					{
-						counter++;
-					}
-					j = 0;
-					break;
-				default:
-					word[j] = c;
-					j++;
+				word[j] = c;
+				j++;
 			}
 		}
 		if ( counter > max_counter )

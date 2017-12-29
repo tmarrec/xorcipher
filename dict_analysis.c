@@ -6,13 +6,12 @@
 #include <math.h>
 
 #include "cipher.h"
-#include "read_file.h"
+#include "file.h"
 
-
-unsigned long get_hash(char *word)
+unsigned long get_hash(char *word, unsigned int j)
 {
 	unsigned long somme = 0;
-	for ( unsigned int i = 0; i < strlen(word); ++i )
+	for ( unsigned int i = 0; i < j; ++i )
 	{
 		somme += word[i]*pow(256,i);
 	}
@@ -21,74 +20,56 @@ unsigned long get_hash(char *word)
 
 void fill_hash_table(bool *french_word_hash_table)
 {
-	FILE *dict_file = fopen("dict.txt", "r");
-	int c;
-	unsigned long somme = 0;
-	unsigned int i = 0;
-	while ( (c = fgetc(dict_file)) != EOF )
+	FILE *hash_file = fopen("hash_table", "r");
+	unsigned long hash;
+	while ( fscanf(hash_file, "%lu", &hash) != EOF )
 	{
-		if ( c == 10 && i <= 4 && i >= 2)
-		{
-			french_word_hash_table[somme] = true;
-			//printf("%lu\n", somme);
-			i = 0;
-			somme = 0;
-		}
-		else if ( c == 10 )
-		{
-			i = 0;
-			somme = 0;
-		}
-		else
-		{
-			somme += c*pow(256,i);
-			i++;	
-		}		
+		french_word_hash_table[hash] = true;
 	}
-	fclose(dict_file);
+	fclose(hash_file);
+}
+
+bool is_valid_word(unsigned int j, char *word, bool *french_word_hash_table)
+{
+	switch(j)
+	{
+		case 2 ... 4:
+			word[0] = tolower(word[0]);
+			return french_word_hash_table[get_hash(word, j)];
+	}
+	return false;
 }
 
 void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsigned int *key_list_n)
 {
-	char **french_word = NULL;
-	french_word = (char**)calloc(336531, sizeof(char*));
-	for ( unsigned int i = 0; i < 336531; ++i )
-	{
-		french_word[i] = (char*)calloc(25, sizeof(char));
-	}
 	bool *french_word_hash_table = NULL;
 	french_word_hash_table = (bool*)calloc(4217660786, sizeof(bool));
 	fill_hash_table(french_word_hash_table);
 		
 	char *file_text = NULL;
 	file_text = read_file(input_name);
-	FILE *input_file;
-	input_file = fopen(*input_name, "r");
-	fseek(input_file, 0l, SEEK_END);
-	unsigned long file_size = ftell(input_file);
-	fclose(input_file);
+	
+	unsigned long file_size = get_file_size(input_name);
 	char *file_ciphered = calloc(file_size, sizeof(char));
 
 	unsigned char int_key_lenght = atoi(*key_lenght);
 	int c;
 	unsigned char j = 0;
-	char word[1024];
+	char word[2048];
 	unsigned long counter = 0;
 	unsigned long max_counter = 0;
 	unsigned long max_i = 0;
 	
-	for (int i = 0; i < (*key_list_n); ++i )
+	for (unsigned long i = 0; i < (*key_list_n); ++i )
 	{
 		file_ciphered = xor_cipher_return(file_text, key_list[i], file_size, int_key_lenght);
 		for ( unsigned long cursor = 0; cursor < file_size; ++cursor)
 		{
-			//printf("%c", c);
 			c = file_ciphered[cursor];
 			if ( c < 0 )
 			{
 				c += 256;
 			}
-
 			switch(c)
 			{
 				case 32 ... 34:
@@ -98,17 +79,11 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 				case 58 ... 59:
 				case 63:
 					word[j] = 0;
-					j = 0;
-					if ( strlen(word) >= 2 && strlen(word) <= 4 )
+					if ( is_valid_word(j, word, french_word_hash_table) == true )
 					{
-						word[0] = tolower(word[0]);
-						//printf("%s ", word);
-						if ( french_word_hash_table[get_hash(word)] == true )
-						{
-							//printf("%s ", word);
-							counter++;
-						}
+						counter++;
 					}
+					j = 0;
 					break;
 				default:
 					word[j] = c;
@@ -121,7 +96,6 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 			max_i = i;
 		}
 		counter = 0;
-
 	}
 	printf("%s\n", key_list[max_i]);
 }

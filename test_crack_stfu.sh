@@ -113,7 +113,7 @@ function test_crack1 {
 
 test crack1; # validité
 test crack2; #
-#test crack31;
+test crack31;
 #test crack32;
     
 exit 0

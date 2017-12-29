@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
 	clock_t end = 0;
 
 	bool isok = true;
+
 	
 	readopt(argc, argv, &input_name, &output_name, &key, &mode, &key_lenght);
 	opt_mode = checkopt(&input_name, &output_name, &key, &mode, &key_lenght);
@@ -76,7 +77,6 @@ int main(int argc, char *argv[])
 				{
 					key_lenght[0] = i+'0';
 					c_key = c_validate(&input_name, &key_lenght, key_list_n, false, &isok);
-					//printf("lol");
 					if ( isok == true )
 					{
 						key_list = get_key_list(&key_lenght, c_key, key_list_n);
@@ -86,27 +86,6 @@ int main(int argc, char *argv[])
 					{
 						isok = true;
 					}
-					/*if ( strcmp(key_list[0], "!(;)!") != 0 )
-					{
-						freq_analysis(&input_name, &key_lenght, key_list, key_list_n);
-					}*/
-					/*
-					if ( isok == true )
-					{
-						printf("nice");
-						exit(0);
-					}
-					if (*/ /*c_key[0][0] ==*//* 1 )
-					{
-						printf("lolskurt");
-						//exit(0);
-						freq_analysis(&input_name, &key_lenght, key_list, key_list_n);
-					}
-					else
-					{
-						printf("ko");
-						exit(0);
-					}*/
 				}
 			}
 		}
@@ -125,10 +104,6 @@ int main(int argc, char *argv[])
 				{
 					key_lenght[0] = i+'0';
 					c_key = c_validate(&input_name, &key_lenght, key_list_n, false, &isok);
-					/*if ( strcmp(key_list[0], "!(;)!") != 0 )
-					{
-						dict_analysis(&input_name, &key_lenght, key_list, key_list_n);	
-					}*/
 					if ( isok == true )
 					{
 						key_list = get_key_list(&key_lenght, c_key, key_list_n);

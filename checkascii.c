@@ -27,15 +27,14 @@ bool checkkey(char **key)
 
 bool checkmessage_opt(char *file_text, unsigned int i_key, unsigned int l_key, int file_size)
 {
-		
 	int c = 0;
-	int i = i_key;
+	unsigned int i = i_key;
 	while ( i < file_size )
 	{
 		c = file_text[i];
 		if ( c < 0 )
 		{
-			c = 256+c;
+			c += 256;
 		}
 		switch(c)
 		{
@@ -70,7 +69,6 @@ bool checkmessage_opt(char *file_text, unsigned int i_key, unsigned int l_key, i
 			case 250:
 			case 252 ... 255:
 				return false;
-				break;
 		}
 		i += l_key;
 	}

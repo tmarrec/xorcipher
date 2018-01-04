@@ -4,7 +4,9 @@
 
 char* xor_cipher_return(char *file_text, char key[], int file_size, int key_lenght)
 {
-	char *file_ciphered = calloc(file_size, sizeof(char));
+	//printf("file size : %d\n", file_size);
+	char *file_ciphered = NULL;
+	file_ciphered = calloc(file_size, sizeof(char));
 	unsigned int j;
 	for ( j = 0; j < file_size; ++j )
 	{

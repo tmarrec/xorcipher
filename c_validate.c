@@ -22,17 +22,20 @@ void print_result(char **c_key, int int_key_lenght)
 char get_c_key(char **c_key, char **key_lenght, char **input_name, bool need_print_result, int int_key_lenght)
 {
 	char key[1];
-	unsigned int alphabet[71] = {44,45,46,48,49,50,51,52,53,54,55,56,57,58,63,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,95,90,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,125};
+	unsigned int alphabet[71] = {44,45,46,48,49,50,51,52,53,54,55,56,57,58,63,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,95,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,125};
 	unsigned char key_n = 0;
 	char *file_text = NULL;
+	
 	file_text = read_file(input_name);
+	
 	unsigned long file_size = get_file_size(input_name);
-	char *file_ciphered = calloc(file_size, sizeof(char));
+	char *file_ciphered = NULL;
 	for ( unsigned int i = 0; i < int_key_lenght; ++i )
 	{
 		key_n = 0;
 		for ( unsigned int j = 0; j < 71; ++j )
 		{
+			file_ciphered = calloc(file_size+1, sizeof(char));
 			key[0] = alphabet[j];
 			file_ciphered = xor_cipher_return(file_text, key, file_size, 1);
 			if ( checkmessage_opt(file_ciphered, i, int_key_lenght, file_size) == true )
@@ -40,9 +43,11 @@ char get_c_key(char **c_key, char **key_lenght, char **input_name, bool need_pri
 				c_key[i][key_n] = alphabet[j];
 				key_n++;
 			}
+			free(file_ciphered);
 		}
 		if ( key_n == 0 )
 		{
+			free(file_text);
 			return -1;
 		}
 		c_key[i][key_n] = 0;
@@ -51,11 +56,12 @@ char get_c_key(char **c_key, char **key_lenght, char **input_name, bool need_pri
 	{
 		print_result(c_key, int_key_lenght);
 	}
+	free(file_text);
 	return 1;
 }
 
 
-char** c_validate(char **input_name, char **key_lenght, unsigned int *key_list_n, bool print_result, bool *isok)
+char** c_validate(char **input_name, char **key_lenght, bool print_result, bool *isok)
 {
 	int int_key_lenght = atoi(*key_lenght);
 	char **c_key = NULL;

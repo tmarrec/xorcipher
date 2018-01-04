@@ -1,11 +1,10 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 void combination_arrays(char **key_lenght, int n, int *cursor, char **key_list, char **c_key, int int_key_lenght, char *c_key_lenght)
 {	
 	char *temp = NULL;
-	temp = calloc(int_key_lenght+1, sizeof(char));
+	temp = calloc(int_key_lenght, sizeof(char));
 	unsigned int cursor_in_cursor = int_key_lenght-1;
 	for ( unsigned int i = 0; i < n; ++i )
 	{
@@ -23,7 +22,7 @@ void combination_arrays(char **key_lenght, int n, int *cursor, char **key_list, 
 		}
 		cursor_in_cursor = int_key_lenght-1;
 	}
-	free(temp);
+	//free(temp);
 }
 
 char** get_key_list(char **key_lenght, char **c_key, unsigned int *key_list_n)
@@ -50,12 +49,12 @@ char** get_key_list(char **key_lenght, char **c_key, unsigned int *key_list_n)
 		key_list[i] = calloc(int_key_lenght, sizeof(char*));
 	}
 	combination_arrays(key_lenght, n, cursor, key_list, c_key, int_key_lenght, c_key_lenght);
-	for ( unsigned int i = 0; i < int_key_lenght; ++i )
+	/*for ( unsigned int i = 0; i < int_key_lenght; ++i )
 	{
 		free(c_key[i]);
 	}
-	free(c_key);
-	free(cursor);
+	free(c_key);*/
+	//free(cursor);
 	*key_list_n = n;
 	return key_list;
 }

@@ -1,10 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <string.h>
 #include <stdbool.h>
 
 #include "checkascii.h"
+
+/****************************************************************
+* READOPT *													    *
+***********														*
+* Stocke dans des variables les options entrées par				*
+* l'utilisateur.										 		*
+****************************************************************/
 
 void readopt(int argc, char *argv[], char **input_name, char **output_name, char **key, char **mode, char **key_lenght)
 {
@@ -32,18 +38,19 @@ void readopt(int argc, char *argv[], char **input_name, char **output_name, char
 	}
 }
 
+/****************************************************************
+* CHECKOPT *												    *
+************													*
+* Vérifie que toutes les options soient correctes.		 		*
+****************************************************************/
+
 unsigned char checkopt(char **input_name, char **output_name, char **key, char **mode, char **key_lenght)
 {
+    //	Verifie que la commande soit correcte.
 	unsigned char opt_mode = 0;
-	
-	/*
-     *	Verifie que la commande soit correcte.
-	 */
-
 	if ( *input_name != NULL && *output_name != NULL && *key != NULL && *mode == NULL && *key_lenght == NULL )
 	{
-		// Chiffrage / Dechiffrage
-		opt_mode = 0;
+		opt_mode = 0; // Mode chiffrage / dechiffrage
 	}
 	else if ( *input_name != NULL && *mode != NULL && *output_name == NULL && *key == NULL )
 	{
@@ -51,8 +58,7 @@ unsigned char checkopt(char **input_name, char **output_name, char **key, char *
 		{
 			*key_lenght = "0";
 		}
-		// Cassage
-		opt_mode = 1;
+		opt_mode = 1; // Mode cassage
 	}
 	else
 	{
@@ -63,24 +69,15 @@ unsigned char checkopt(char **input_name, char **output_name, char **key, char *
 		printf("	./xorcipher -i inTextFile -m mode [-l longCle]\n");
 		exit(-1);
 	}
-
-	/*
-	 *	Verifie que le fichier input existe et soit accessible en lecture.
-	 */
-	
+	// Verifie que le fichier input existe et soit accessible en lecture.
 	FILE *test_read_file;
 	if ( (test_read_file = fopen(*input_name, "r") ) == NULL )
 	{
 		printf("Impossible d'ouvrir le fichier donne en lecture\n");
 		exit(-1);
 	}
-
 	fclose(test_read_file);
-
-	/*
-	 * Si on est en mode Chiffrage / Dechiffrage, verifie si la cle est valide
-	 */
-	
+	// Si on est en mode Chiffrage / Dechiffrage, verifie si la cle est valide
 	if ( opt_mode == 0 )
 	{
 		if ( checkkey(key) == false )

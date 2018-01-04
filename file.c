@@ -3,15 +3,16 @@
 
 char* read_file(char **input_name)
 {
-	FILE *input_file;
+	FILE *input_file = NULL;
 	input_file = fopen(*input_name, "r");
-	char *file_text = calloc(1, sizeof(char));
+	char *file_text = NULL;
+	file_text = calloc(1, sizeof(char));
 	int c;
 	unsigned long i = 0;
 	while ( (c = fgetc(input_file)) != EOF )
 	{
 		file_text[i++] = c;
-		file_text = (char*)realloc(file_text, (i+1)*sizeof(char));
+		file_text = realloc(file_text, (i+1)*sizeof(char));
 	}
 	file_text[i] = 0;
 	fclose(input_file);
@@ -20,7 +21,7 @@ char* read_file(char **input_name)
 
 unsigned long get_file_size(char **input_name)
 {
-	FILE *input_file;
+	FILE *input_file = NULL;
 	input_file = fopen(*input_name, "r");
 	fseek(input_file, 0l, SEEK_END);
 	unsigned long file_size = ftell(input_file);

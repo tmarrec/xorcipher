@@ -24,7 +24,8 @@ int main(int argc, char *argv[])
 	char **c_key = NULL;
 	
 	char **key_list = NULL;
-	unsigned int *key_list_n = malloc(sizeof(unsigned int));
+	unsigned int *key_list_n = NULL;
+	key_list_n = calloc(1, sizeof(unsigned int));
 
 	clock_t start = 0;
 	clock_t end = 0;
@@ -45,28 +46,26 @@ int main(int argc, char *argv[])
 	{
 		if ( *mode == 49 )
 		{
-			start = clock();
 			if ( atoi(key_lenght) > 0 )
 			{
-				c_key = c_validate(&input_name, &key_lenght, key_list_n, true, &isok);
+				c_key = c_validate(&input_name, &key_lenght, true, &isok);
 			}
 			else
 			{
-				key_lenght = malloc(1*sizeof(int));
-				for ( int i = 3; i < 8; ++i )
+				key_lenght = calloc(1, sizeof(char));
+				for ( char i = 3; i < 8; ++i )
 				{
 					key_lenght[0] = i+'0';
-					c_key = c_validate(&input_name, &key_lenght, key_list_n, true, &isok);
+					c_key = c_validate(&input_name, &key_lenght, true, &isok);
 				}
+				free(key_lenght);
 			}
-			end = clock();
-			//printf("En %f secondes faut le savoir hein !\n", (double)(end-start)/CLOCKS_PER_SEC);
 		}
 		else if ( *mode == 50 )
 		{
 			if ( atoi(key_lenght) > 0 )
 			{
-				c_key = c_validate(&input_name, &key_lenght, key_list_n, false, &isok);
+				c_key = c_validate(&input_name, &key_lenght, false, &isok);
 				key_list = get_key_list(&key_lenght, c_key , key_list_n);
 				freq_analysis(&input_name, &key_lenght, key_list, key_list_n);
 			}
@@ -76,7 +75,7 @@ int main(int argc, char *argv[])
 				for ( int i = 3; i < 8; ++i )
 				{
 					key_lenght[0] = i+'0';
-					c_key = c_validate(&input_name, &key_lenght, key_list_n, false, &isok);
+					c_key = c_validate(&input_name, &key_lenght, false, &isok);
 					if ( isok == true )
 					{
 						key_list = get_key_list(&key_lenght, c_key, key_list_n);
@@ -93,7 +92,7 @@ int main(int argc, char *argv[])
 		{
 			if ( atoi(key_lenght) > 0 )
 			{
-				c_key = c_validate(&input_name, &key_lenght, key_list_n, false, &isok);
+				c_key = c_validate(&input_name, &key_lenght, false, &isok);
 				key_list = get_key_list(&key_lenght, c_key, key_list_n);
 				dict_analysis(&input_name, &key_lenght, key_list, key_list_n);
 			}
@@ -103,7 +102,7 @@ int main(int argc, char *argv[])
 				for ( int i = 3; i < 8; ++i )
 				{
 					key_lenght[0] = i+'0';
-					c_key = c_validate(&input_name, &key_lenght, key_list_n, false, &isok);
+					c_key = c_validate(&input_name, &key_lenght, false, &isok);
 					if ( isok == true )
 					{
 						key_list = get_key_list(&key_lenght, c_key, key_list_n);

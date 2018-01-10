@@ -16,7 +16,7 @@
 * j : Position du curseur dans le tableau de charactère         *
 * *n_c : Nombre de caractères dans le tableau                   *
 * *freq_letter : La fréquence d'apparition des lettres          *
-* *file_ciphered : Tableau de caractères du fichier chiffré	    *
+* *file_ciphered : Tableau de caractères du fichier chiffré     *
 ****************************************************************/
 
 void increase_freq_letter(unsigned long j, unsigned long *n_c, float *freq_letter, unsigned char *file_ciphered)

@@ -17,7 +17,7 @@
 * **output_name : Nom du fichier en sortie                      *
 * **key : Clé                                                   *
 * **mode : Mode choisis                                         *
-* **key_lenght : Longueur de la clé	                            *
+* **key_lenght : Longueur de la clé                             *
 ****************************************************************/
 
 void readopt(int argc, char *argv[], char **input_name, char **output_name, char **key, char **mode, char **key_lenght)
@@ -49,9 +49,9 @@ void readopt(int argc, char *argv[], char **input_name, char **output_name, char
 /****************************************************************
 * CHECKOPT *                                                    *
 ************                                                    *
-* Vérifie que toutes les options soient correctes et retourne	  *
+* Vérifie que toutes les options soient correctes et retourne   *
 * le mode choisis                                               *
-*	                                                              *
+*                                                               *
 * **input_name : Nom du fichier d'entrée                        *
 * **output_name : Nom du fichier en sortie                      *
 * **key : Clé                                                   *

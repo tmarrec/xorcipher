@@ -6,7 +6,7 @@
 **********************                                          *
 * Fait la combinaison des clés possibles avec les caractères    *
 * possibles                                                     *
-*	                                                              *
+*                                                               *
 * n : Nombre de clé	possible                                    *
 * *cursor : curseur dans les clés                               *
 * **key_list : Liste des clés possibles                         *

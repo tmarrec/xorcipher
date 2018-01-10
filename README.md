@@ -1,6 +1,6 @@
 # XOR-CIPHER
 
-This is a project for my second year of Computer Science at University Paul Sabatier Toulouse
+This is a school project for my second year of Computer Science at University Paul Sabatier Toulouse
 
 ## Installing
 

@@ -3,14 +3,14 @@
 #include <string.h>
 
 /****************************************************************
-* XOR_CIPHER_RETURN *										    *
-*********************											*
+* XOR_CIPHER_RETURN *                                           *
+*********************                                           *
 * Chiffre le texte donné en entrée et renvoie le texte chiffré	*
-*																*
-* *file_texte : Texte non chiffré								*
-* key[] : Clé													*
-* file_size : Longueur du texte									*
-* key_lenght : Longueur de la clé								*
+*                                                               *
+* *file_texte : Texte non chiffré                               *
+* key[] : Clé                                                   *
+* file_size : Longueur du texte                                 *
+* key_lenght : Longueur de la clé                               *
 ****************************************************************/
 
 unsigned char* xor_cipher_return(unsigned char *file_text, char key[], unsigned long file_size, int key_lenght)
@@ -27,14 +27,14 @@ unsigned char* xor_cipher_return(unsigned char *file_text, char key[], unsigned 
 }
 
 /****************************************************************
-* XOR_CIPHER *												    *
-**************													*
+* XOR_CIPHER *                                                  *
+**************                                                  *
 * Chiffre le fichier donné en entrée et l'écrit dans un autre 	*
-* fichier														*
-*																*
-* **input_name : Nom du fichier donné en entrée					*
-* key[] : Clé													*
-* **output_name : Nom du fichier donné en sortie				*
+* fichier                                                       *
+*                                                               *
+* **input_name : Nom du fichier donné en entrée                 *
+* key[] : Clé                                                   *
+* **output_name : Nom du fichier donné en sortie                *
 ****************************************************************/
 
 void xor_cipher(char **input_name, char key[], char **output_name)

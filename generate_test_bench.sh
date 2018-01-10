@@ -25,7 +25,7 @@ number_key_type=10
 
 echo Key reference generation
 for k in `seq 1 5`; do
-	for j in `seq 1 $number_key_type`; do	
+	for j in `seq 1 $number_key_type`; do
 		head /dev/urandom | tr -dc 'A-Za-z0-9,-.:?_{}' | head -c $key_lenght >> test_bench/ref/keys
 		echo >> test_bench/ref/keys
 		echo -en "$ceol$k/5 | $j/$number_key_type \r"
@@ -35,7 +35,7 @@ done
 
 echo Uncrypted reference file generation
 for k in `seq 1 $number_of_type`; do
-	for j in `seq 1 $number_file_type`; do	
+	for j in `seq 1 $number_file_type`; do
 		for i in `seq 1 $text_lenght`; do
 			echo -ne `shuf -n1 dict.txt`" " >> test_bench/ref/uncrypted/$file_id
 			echo -en "$ceol$k/$number_of_type | $j/$number_file_type | $i/$text_lenght \r"
@@ -68,7 +68,7 @@ for file in test_bench/ref/crypted/*; do
 		exit
 	fi
 	echo -en "$ceol$i/$number_of_crypted_file\r"
-	i=$(( $i + 1 )) 
+	i=$(( $i + 1 ))
 done
 
 

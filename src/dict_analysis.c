@@ -8,14 +8,14 @@
 #include "file.h"
 
 /****************************************************************
-* GET_HASH *												    *
-************													*
-* Calcule le hash d'un mot										*
-*																*
-* *word : Le mot												*
-* j : Longueur du mot											*
-*																*
-* hash : Le hash du mot											* 
+* GET_HASH *                                                    *
+************                                                    *
+* Calcule le hash d'un mot                                      *
+*                                                               *
+* *word : Le mot                                                *
+* j : Longueur du mot                                           *
+*                                                               *
+* hash : Le hash du mot                                         *
 ****************************************************************/
 
 unsigned long get_hash(char *word, unsigned char j)
@@ -29,12 +29,12 @@ unsigned long get_hash(char *word, unsigned char j)
 }
 
 /****************************************************************
-* FILL_HASH_TABLE *											    *
-*******************												*
-* Remplis le tableau des hash avec le fichier des hash			*
-* précalculé													*
-*																*
-* *french_word_hash_table : Table de hachage					*
+* FILL_HASH_TABLE *                                             *
+*******************                                             *
+* Remplis le tableau des hash avec le fichier des hash          *
+* précalculé                                                    *
+*                                                               *
+* *french_word_hash_table : Table de hachage                    *
 ****************************************************************/
 
 void fill_hash_table(bool *french_word_hash_table)
@@ -49,13 +49,13 @@ void fill_hash_table(bool *french_word_hash_table)
 }
 
 /****************************************************************
-* IS_VALID_WORD *											    *
-*****************												*
-* Verifie que le mot soit valide								*
-*																*
-* j : Longueur du mot											*
-* *word : Le mot												*
-* *french_word_hash_table : Table de hachage					*
+* IS_VALID_WORD *                                               *
+*****************                                               *
+* Verifie que le mot soit valide                                *
+*                                                               *
+* j : Longueur du mot                                           *
+* *word : Le mot                                                *
+* *french_word_hash_table : Table de hachage                    *
 ****************************************************************/
 
 bool is_valid_word(unsigned char j, char *word, bool *french_word_hash_table)
@@ -70,11 +70,11 @@ bool is_valid_word(unsigned char j, char *word, bool *french_word_hash_table)
 }
 
 /****************************************************************
-* IS_SEPARATOR *											    *
-****************												*
-* Verifie si le caractère est un séparateur						*
-*																*
-* c : Le caractère												*
+* IS_SEPARATOR *                                                *
+****************                                                *
+* Verifie si le caractère est un séparateur                     *
+*                                                               *
+* c : Le caractère                                              *
 ****************************************************************/
 
 bool is_separator(int c)
@@ -91,22 +91,22 @@ bool is_separator(int c)
 		case 46:
 		case 58 ... 59:
 		case 63:
-			return true;	
+			return true;
 		default:
 			return false;
 	}
 }
 
 /****************************************************************
-* DICT_ANALYSIS *											    *
-*****************												*
-* Fait une analyse par dictionnaire pour trouver la clé			*
-* probable														*
-*																*
-* **input_name : Le nom du fichier en entrée					*
-* **key_lenght : Longueur de la clé								*					
-* **keu_list : Liste des clés possibles							*
-* *key_list_n : Nombre de clés possibles						*
+* DICT_ANALYSIS *                                               *
+*****************                                               *
+* Fait une analyse par dictionnaire pour trouver la clé         *
+* probable                                                      *
+*                                                               *
+* **input_name : Le nom du fichier en entrée                    *
+* **key_lenght : Longueur de la clé                             *
+* **keu_list : Liste des clés possibles                         *
+* *key_list_n : Nombre de clés possibles                        *
 ****************************************************************/
 
 void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsigned long *key_list_n)
@@ -155,4 +155,3 @@ void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 	}
 	printf("%s\n", key_list[max_i]);
 }
-

@@ -8,15 +8,15 @@
 #include "file.h"
 
 /****************************************************************
-* INCREASE_FREQ_LETTER *									    *
-************************										*
-* Augmente la valeur de la fréquence d'apparition d'un			*
-* caractère														*
-* 																*
-* j : Position du curseur dans le tableau de charactère			*
-* *n_c : Nombre de caractères dans le tableau					*
-* *freq_letter : La fréquence d'apparition des lettres			*
-* *file_ciphered : Tableau de caractères du fichier chiffré		*
+* INCREASE_FREQ_LETTER *                                        *
+************************                                        *
+* Augmente la valeur de la fréquence d'apparition d'un          *
+* caractère                                                     *
+*                                                               *
+* j : Position du curseur dans le tableau de charactère         *
+* *n_c : Nombre de caractères dans le tableau                   *
+* *freq_letter : La fréquence d'apparition des lettres          *
+* *file_ciphered : Tableau de caractères du fichier chiffré	    *
 ****************************************************************/
 
 void increase_freq_letter(unsigned long j, unsigned long *n_c, float *freq_letter, unsigned char *file_ciphered)
@@ -47,7 +47,7 @@ void increase_freq_letter(unsigned long j, unsigned long *n_c, float *freq_lette
 			break;
 		case 206 ... 207:
 		case 238 ... 239:
-			freq_letter[8]++; // I 
+			freq_letter[8]++; // I
 			break;
 		case 212:
 		case 214:
@@ -75,15 +75,15 @@ void increase_freq_letter(unsigned long j, unsigned long *n_c, float *freq_lette
 }
 
 /****************************************************************
-* INCREASE_FREQ_LETTER *									    *
-************************										*
+* INCREASE_FREQ_LETTER *                                        *
+************************                                        *
 * Utilise l'analyse de fréquence des caractères pour déterminer	*
-* la clé probable												*
-* 																*
-* **input_name : Nom du fichier en entrée						*
-* **key_lenght : Longueur de la clé								*
-* **key_list : Liste des clés possibles							*
-* *key_list_n : Nombre de clés									*
+* la clé probable                                               *
+*                                                               *
+* **input_name : Nom du fichier en entrée                       *
+* **key_lenght : Longueur de la clé                             *
+* **key_list : Liste des clés possibles                         *
+* *key_list_n : Nombre de clés                                  *
 ****************************************************************/
 
 void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsigned long *key_list_n)
@@ -102,7 +102,7 @@ void freq_analysis(char **input_name, char **key_lenght, char **key_list, unsign
 	for ( unsigned long i = 0; i < (*key_list_n); ++i )
 	{
 		file_ciphered = xor_cipher_return(file_text, key_list[i], file_size, int_key_lenght);
-		n_c = 0;	
+		n_c = 0;
 		for ( unsigned long j = 0; j < file_size; ++j ) // Augmente la fréquence pour chaque char
 		{
 			increase_freq_letter(j, &n_c, freq_letter, file_ciphered);

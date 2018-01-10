@@ -2,21 +2,34 @@
 #include <string.h>
 
 /****************************************************************
-* COMBINATION_ARRAYS *										    *
-**********************											*
-* Fait la combinaison des clés possibles avec les caractères 	*
-* possibles														*
-*																*
-* n : Nombre de clé	possible									*
-* *cursor : curseur dans les clés								*
-* **key_list : Liste des clés possibles							*
-* **c_key : Liste des caractères possibles pour les clés		*
-* int_key_lenght : Longueur de la clé							*
-* *c_key_lenght : Tableau de la longueur des clés				* 
+* COMBINATION_ARRAYS *                                          *
+**********************                                          *
+* Fait la combinaison des clés possibles avec les caractères    *
+* possibles                                                     *
+*	                                                              *
+* n : Nombre de clé	possible                                    *
+* *cursor : curseur dans les clés                               *
+* **key_list : Liste des clés possibles                         *
+* **c_key : Liste des caractères possibles pour les clés        *
+* int_key_lenght : Longueur de la clé                           *
+* *c_key_lenght : Tableau de la longueur des clés               *
 ****************************************************************/
-
+// Ici je creer un tableau contenant le nombre de caractères possibles
+// pour chaque caractère de la clé, par exemple :
+// [ab][cdef][g] -> [2][4][1]
+// Puis je creer un tableau dont chaque case est codé en base de la
+// case du tableau précédent.
+// Ex:  pour [2][4][1]
+//            ^  ^  ^
+// base 2 ----|  |  |
+// base 4 -------|  |
+// base 1 ----------|
+// Et a ce tableau dont chaque case a une base différente je
+// l'incrémente a chaque tour de boucle
+// Ce qui donne les indices des caractères de la clé, et ces
+// indices forment l'ensemble des clés possibles
 void combination_arrays(unsigned long n, unsigned long *cursor, char **key_list, char **c_key, unsigned char int_key_lenght, unsigned char *c_key_lenght)
-{	
+{
 	char *temp = NULL;
 	temp = calloc(int_key_lenght, sizeof(char));
 	unsigned char cursor_in_cursor = int_key_lenght-1;
@@ -40,16 +53,16 @@ void combination_arrays(unsigned long n, unsigned long *cursor, char **key_list,
 }
 
 /****************************************************************
-* GET_KEY_LIST *											    *
-****************												*
-* Recupere la liste des clés possible a partir de la liste		*
-* des caractères possibles 										*
-*																*
-* **key_lenght : Longueur de la clé								*
-* **c_key : Liste des caractères possibles pour les clés		*
-* *key_list_n : Nombre de clé possible							*
-*																*
-* key_list : Liste des clés										* 
+* GET_KEY_LIST *                                                *
+****************                                                *
+* Recupere la liste des clés possible a partir de la liste      *
+* des caractères possibles                                      *
+*                                                               *
+* **key_lenght : Longueur de la clé                             *
+* **c_key : Liste des caractères possibles pour les clés        *
+* *key_list_n : Nombre de clé possible                          *
+*                                                               *
+* key_list : Liste des clés                                     *
 ****************************************************************/
 
 char** get_key_list(char **key_lenght, char **c_key, unsigned long *key_list_n)

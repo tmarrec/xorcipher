@@ -10,12 +10,12 @@
 
 
 /****************************************************************
-* PRINT_RESULT *											    *
-****************												*
-* Affiche chaque caractères possibles pour les clés				*
-*																*
-* **c_key : Liste des caractères possibles						*
-* int_key_lenght : Longueur de la clé							*
+* PRINT_RESULT *                                                *
+****************                                                *
+* Affiche chaque caractères possibles pour les clés             *
+*                                                               *
+* **c_key : Liste des caractères possibles                      *
+* int_key_lenght : Longueur de la clé                           *
 ****************************************************************/
 
 void print_result(char **c_key, int int_key_lenght)
@@ -30,14 +30,14 @@ void print_result(char **c_key, int int_key_lenght)
 }
 
 /****************************************************************
-* GET_C_KEY *												    *
-*************													*
-* Cherche les caractères possible pour les clés.				*
-* 																*
-* **c_key : Liste des caractères possibles						*
-* **input_name : Nom du fichier en entrée						*
-* need_print_result : Doit-on afficher le resultat?				*
-* int_key_lenght : Longueur de la clé							*
+* GET_C_KEY *                                                   *
+*************                                                   *
+* Cherche les caractères possible pour les clés.                *
+*                                                               *
+* **c_key : Liste des caractères possibles                      *
+* **input_name : Nom du fichier en entrée                       *
+* need_print_result : Doit-on afficher le resultat?             *
+* int_key_lenght : Longueur de la clé                           *
 ****************************************************************/
 
 char get_c_key(char **c_key, char **input_name, bool need_print_result, unsigned char int_key_lenght)
@@ -82,16 +82,16 @@ char get_c_key(char **c_key, char **input_name, bool need_print_result, unsigned
 }
 
 /****************************************************************
-* C_VALIDATE *												    *
-**************													*
-* Retourne la liste des caractères possible pourr les clés.		*
-* 																*
-* **input_name : Nom du fichier en entrée						*
-* **key_lenght : Longueur de la clé								*
-* print_result : Doit-on afficher le resultat? 					*
-* *isok : Y a t'il des clés possibles?							*
-*																*
-* c_key : Liste des caractères possibles						*
+* C_VALIDATE *                                                  *
+**************                                                  *
+* Retourne la liste des caractères possible pourr les clés.     *
+*                                                               *
+* **input_name : Nom du fichier en entrée                       *
+* **key_lenght : Longueur de la clé                             *
+* print_result : Doit-on afficher le resultat?                  *
+* *isok : Y a t'il des clés possibles?                          *
+*                                                               *
+* c_key : Liste des caractères possibles                        *
 ****************************************************************/
 
 char** c_validate(char **input_name, char **key_lenght, bool print_result, bool *isok)

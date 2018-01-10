@@ -2,13 +2,13 @@
 #include <stdlib.h>
 
 /****************************************************************
-* GET_FILE_SIZE *											    *
-*****************												*
-* Calcule la taille d'un fichier								*
-*																*
-* **input_name : Le nom du fichier en entrée					*
-* 																*
-* file_size : Taille du fichier									*
+* GET_FILE_SIZE *                                               *
+*****************                                               *
+* Calcule la taille d'un fichier                                *
+*                                                               *
+* **input_name : Le nom du fichier en entrée                    *
+*                                                               *
+* file_size : Taille du fichier                                 *
 ****************************************************************/
 
 unsigned long get_file_size(char **input_name)
@@ -22,13 +22,13 @@ unsigned long get_file_size(char **input_name)
 }
 
 /****************************************************************
-* READ_FILE *												    *
-*************													*
-* Met tout les caractères d'un fichier dans un tableau			*
-*																*
-* **input_name : Le nom du fichier en entrée					*
-* 																*
-* file_text : Tout les caractères du fichier					*
+* READ_FILE *                                                   *
+*************                                                   *
+* Met tout les caractères d'un fichier dans un tableau          *
+*                                                               *
+* **input_name : Le nom du fichier en entrée                    *
+*                                                               *
+* file_text : Tout les caractères du fichier                    *
 ****************************************************************/
 
 unsigned char* read_file(char **input_name)

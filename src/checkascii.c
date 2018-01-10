@@ -2,12 +2,12 @@
 #include <stdbool.h>
 
 /****************************************************************
-* CHECKKEY *												    *
-************													*
-* Vérifie pour chaque caractères de la clé donné en entrée 		*
-* s'ils est un caractère valide pour une clé.				 	*
-*																*
-* **key : Clé													*
+* CHECKKEY *                                                    *
+************                                                    *
+* Vérifie pour chaque caractères de la clé donné en entrée      *
+* s'ils est un caractère valide pour une clé.                   *
+*                                                               *
+* **key : Clé                                                   *
 ****************************************************************/
 bool checkkey(char **key)
 {
@@ -32,16 +32,16 @@ bool checkkey(char **key)
 }
 
 /****************************************************************
-* CHECKMESSAGE_OPT *										 	*
-********************										  	*
+* CHECKMESSAGE_OPT *                                            *
+********************                                            *
 * Vérifie pour chaque caractères modulo l_key du texte donné en *
-* entrée s'ils sont des caractères valides pour un texte		*
-* déchiffré.											 		*
-*																*
-* *file_text : Tout les caractères du fichier					*
-* i_key : Position du caractère dans la clé						*
-* l_key : Longueur de la clé									*
-* file_size : Longueur du fichier								*
+* entrée s'ils sont des caractères valides pour un texte        *
+* déchiffré.                                                    *
+*                                                               *
+* *file_text : Tout les caractères du fichier                   *
+* i_key : Position du caractère dans la clé                     *
+* l_key : Longueur de la clé                                    *
+* file_size : Longueur du fichier                               *
 ****************************************************************/
 bool checkmessage_opt(unsigned char *file_text, unsigned char i_key, unsigned int l_key, unsigned long file_size)
 {
@@ -54,7 +54,7 @@ bool checkmessage_opt(unsigned char *file_text, unsigned char i_key, unsigned in
 		{
 			case 0 ... 9:
 			case 11 ... 31:
-			case 35 ... 38: 
+			case 35 ... 38:
 			case 42 ... 43:
 			case 47 ... 57:
 			case 60 ... 62:

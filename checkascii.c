@@ -6,6 +6,8 @@
 ************													*
 * Vérifie pour chaque caractères de la clé donné en entrée 		*
 * s'ils est un caractère valide pour une clé.				 	*
+*																*
+* **key : Clé													*
 ****************************************************************/
 bool checkkey(char **key)
 {
@@ -35,18 +37,19 @@ bool checkkey(char **key)
 * Vérifie pour chaque caractères modulo l_key du texte donné en *
 * entrée s'ils sont des caractères valides pour un texte		*
 * déchiffré.											 		*
+*																*
+* *file_text : Tout les caractères du fichier					*
+* i_key : Position du caractère dans la clé						*
+* l_key : Longueur de la clé									*
+* file_size : Longueur du fichier								*
 ****************************************************************/
-bool checkmessage_opt(char *file_text, unsigned int i_key, unsigned int l_key, int file_size)
+bool checkmessage_opt(unsigned char *file_text, unsigned char i_key, unsigned int l_key, unsigned long file_size)
 {
 	unsigned char c = 0;
-	unsigned int i = i_key;
+	unsigned long i = (unsigned long)i_key;
 	while ( i < file_size )
 	{
 		c = file_text[i];
-		if ( c < 0 )
-		{
-			c += 256;
-		}
 		switch(c)
 		{
 			case 0 ... 9:

@@ -61,10 +61,13 @@ done
 
 number_of_crypted_file=`ls -1q test_bench/ref/crypted | wc -l`
 i=1
-echo C2 reference file generation
+echo C1 reference file generation
 for file in test_bench/ref/crypted/*; do
-	./xorcipher -i $file -m 1
-	echo $i/$number_of_crypted_file
+	./xorcipher -i $file -m 1 > /dev/null
+	if [ $? -ne 0 ]; then
+		exit
+	fi
+	echo -en "$ceol$i/$number_of_crypted_file\r"
 	i=$(( $i + 1 )) 
 done
 

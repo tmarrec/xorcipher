@@ -1,12 +1,26 @@
 #include <stdlib.h>
 #include <string.h>
 
-void combination_arrays(char **key_lenght, int n, int *cursor, char **key_list, char **c_key, int int_key_lenght, char *c_key_lenght)
+/****************************************************************
+* COMBINATION_ARRAYS *										    *
+**********************											*
+* Fait la combinaison des clés possibles avec les caractères 	*
+* possibles														*
+*																*
+* n : Nombre de clé	possible									*
+* *cursor : curseur dans les clés								*
+* **key_list : Liste des clés possibles							*
+* **c_key : Liste des caractères possibles pour les clés		*
+* int_key_lenght : Longueur de la clé							*
+* *c_key_lenght : Tableau de la longueur des clés				* 
+****************************************************************/
+
+void combination_arrays(unsigned long n, unsigned long *cursor, char **key_list, char **c_key, unsigned char int_key_lenght, unsigned char *c_key_lenght)
 {	
 	char *temp = NULL;
 	temp = calloc(int_key_lenght, sizeof(char));
-	unsigned int cursor_in_cursor = int_key_lenght-1;
-	for ( unsigned int i = 0; i < n; ++i )
+	unsigned char cursor_in_cursor = int_key_lenght-1;
+	for ( unsigned long i = 0; i < n; ++i )
 	{
 		for ( unsigned char j = 0; j < int_key_lenght; ++j )
 		{
@@ -22,15 +36,28 @@ void combination_arrays(char **key_lenght, int n, int *cursor, char **key_list, 
 		}
 		cursor_in_cursor = int_key_lenght-1;
 	}
-	//free(temp);
+	free(temp);
 }
 
-char** get_key_list(char **key_lenght, char **c_key, unsigned int *key_list_n)
+/****************************************************************
+* GET_KEY_LIST *											    *
+****************												*
+* Recupere la liste des clés possible a partir de la liste		*
+* des caractères possibles 										*
+*																*
+* **key_lenght : Longueur de la clé								*
+* **c_key : Liste des caractères possibles pour les clés		*
+* *key_list_n : Nombre de clé possible							*
+*																*
+* key_list : Liste des clés										* 
+****************************************************************/
+
+char** get_key_list(char **key_lenght, char **c_key, unsigned long *key_list_n)
 {
-	int int_key_lenght = atoi(*key_lenght);
-	char *c_key_lenght = NULL;
-	c_key_lenght = calloc(int_key_lenght, sizeof(char));
-	unsigned int n = 1;
+	unsigned char int_key_lenght = atoi(*key_lenght);
+	unsigned char *c_key_lenght = NULL;
+	c_key_lenght = calloc(int_key_lenght, sizeof(unsigned char));
+	unsigned long n = 1;
 	char temp;
 	for ( unsigned char i = 0; i < int_key_lenght; ++i )
 	{
@@ -38,23 +65,23 @@ char** get_key_list(char **key_lenght, char **c_key, unsigned int *key_list_n)
 		n = n*temp;
 		c_key_lenght[i] = temp;
 	}
-	
-	int *cursor = NULL;
-	cursor = calloc(int_key_lenght, sizeof(int));
-
+	unsigned long *cursor = NULL;
+	cursor = calloc(int_key_lenght, sizeof(unsigned long));
 	char **key_list = NULL;
 	key_list = calloc(n, sizeof(char**));
 	for ( unsigned int i = 0; i < n; ++i )
 	{
 		key_list[i] = calloc(int_key_lenght, sizeof(char*));
 	}
-	combination_arrays(key_lenght, n, cursor, key_list, c_key, int_key_lenght, c_key_lenght);
-	/*for ( unsigned int i = 0; i < int_key_lenght; ++i )
+	combination_arrays(n, cursor, key_list, c_key, int_key_lenght, c_key_lenght);
+	// Libère la mémoire
+	for ( unsigned char i = 0; i < int_key_lenght; ++i )
 	{
 		free(c_key[i]);
 	}
-	free(c_key);*/
-	//free(cursor);
+	free(c_key);
+	free(cursor);
+	free(c_key_lenght);
 	*key_list_n = n;
 	return key_list;
 }

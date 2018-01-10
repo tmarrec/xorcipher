@@ -1,2 +1,2 @@
-void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsigned int *key_list_n);
+void dict_analysis(char **input_name, char **key_lenght, char **key_list, unsigned long *key_list_n);
 

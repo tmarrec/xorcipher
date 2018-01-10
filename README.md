@@ -1,4 +1,4 @@
-# XOR-CIPHER
+# XORCIPHER
 
 This is a school project for my second year of Computer Science at University Paul Sabatier Toulouse
 

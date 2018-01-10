@@ -1,22 +1,22 @@
 CC=gcc
 CFLAGS=-Ofast -Wall -Wextra -g
-OBJ=options.o checkascii.o cipher.o c_validate.o freq_analysis.o dict_analysis.o file.o combination.o main.o
+OBJ=src/options.o src/checkascii.o src/cipher.o src/c_validate.o src/freq_analysis.o src/dict_analysis.o src/file.o src/combination.o src/main.o
 
 util: $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o xorcipher -lm
 
-options.o: options.c
-checkascii.o: checkascii.c
-cipher.o: cipher.c
-c_validate.o: c_validate.c
-freq_analysis.o: freq_analysis.c
-dict_analysis.o: dict_analysis.c
-file.o: file.c
-combination.o: combination.c
-main.o: main.c
+src/options.o: src/options.c
+src/checkascii.o: src/checkascii.c
+src/cipher.o: src/cipher.c
+src/c_validate.o: src/c_validate.c
+src/freq_analysis.o: src/freq_analysis.c
+src/dict_analysis.o: src/dict_analysis.c
+src/file.o: src/file.c
+src/combination.o: src/combination.c
+src/main.o: src/main.c
 
 clean:
-	rm *.o
+	rm src/*.o
 
 maxclean: clean
-	rm -rF $(EXEC)
+	rm src/-rF $(EXEC)

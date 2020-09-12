@@ -4,6 +4,11 @@ if [ -d test_bench ]; then
 	rm -R test_bench
 fi
 
+if [ ! -f xorcipher ]; then
+	echo Compile the project first !
+	exit
+fi	
+
 mkdir test_bench
 mkdir test_bench/uncrypted
 mkdir test_bench/crypted
@@ -56,7 +61,7 @@ for file in test_bench/uncrypted/*; do
 	done
 	j=$(( $j + 1 ))
 done
-test=lol
+test=0
 number_of_crypted_file=`ls -1q test_bench/crypted | wc -l`
 for j in `seq 1 3`; do
 	i=1
@@ -69,6 +74,7 @@ for j in `seq 1 3`; do
 		i=$(( $i + 1 ))
 	done
 done
-echo
+echo -e "\033[2K"
+echo Done !
 
 

@@ -1,8 +1,11 @@
 # XORCIPHER
 
-This is a school project for my second year of Computer Science at University Paul Sabatier Toulouse
+This is a school project for my second year of Computer Science at University Paul Sabatier, Toulouse FRANCE.
+The program encrypts text files using the XOR cipher encryption algorithm.
+It can decrypt thoses encrypted files with or without the key.
 
-## Installing
+
+## Building
 
 ```shell
 git clone https://github.com/Trietch/xorcipher.git && cd xorcipher

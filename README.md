@@ -14,7 +14,7 @@ make && make clean
 
 ## Author
 
-* **Tristan Marrec** - *Student* - [Trietch](https://github.com/Trietch)
+* **Tristan Marrec** - *Student* - [tmarrec](https://github.com/tmarrec)
 
 ## License
 

@@ -8,7 +8,7 @@ It can decrypt thoses encrypted files with or without the key.
 ## Building
 
 ```shell
-git clone https://github.com/Trietch/xorcipher.git && cd xorcipher
+git clone https://github.com/tmarrec/xorcipher.git && cd xorcipher
 make && make clean
 ```
 
